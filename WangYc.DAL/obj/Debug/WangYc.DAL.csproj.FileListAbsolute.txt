@@ -1,0 +1,9 @@
+E:\wangyancai.work\WangYc.MVC\WangYc.DAL\bin\Debug\WangYc.DAL.dll
+E:\wangyancai.work\WangYc.MVC\WangYc.DAL\bin\Debug\WangYc.DAL.pdb
+E:\wangyancai.work\WangYc.MVC\WangYc.DAL\bin\Debug\WangYc.DBUtility.dll
+E:\wangyancai.work\WangYc.MVC\WangYc.DAL\bin\Debug\WangYc.Models.dll
+E:\wangyancai.work\WangYc.MVC\WangYc.DAL\bin\Debug\WangYc.DBUtility.pdb
+E:\wangyancai.work\WangYc.MVC\WangYc.DAL\bin\Debug\WangYc.Models.pdb
+E:\wangyancai.work\WangYc.MVC\WangYc.DAL\obj\Debug\WangYc.DAL.csprojResolveAssemblyReference.cache
+E:\wangyancai.work\WangYc.MVC\WangYc.DAL\obj\Debug\WangYc.DAL.dll
+E:\wangyancai.work\WangYc.MVC\WangYc.DAL\obj\Debug\WangYc.DAL.pdb

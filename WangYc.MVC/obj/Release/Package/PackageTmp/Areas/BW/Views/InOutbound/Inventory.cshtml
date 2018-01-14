@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "历史记录";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+
+    //step.0.初始化
+    $(function () {
+
+        BindList();
+ 
+    });
+
+    //step.1.绑定列表
+    function BindList() {
+        var url = $.Url.Action("GetSpotInventory");
+        $('#table').bootstrapTable('destroy');
+        $("#table").bootstrapTable({
+            method: "get",      //使用get请求到服务器获取数据
+            url: url,           //获取数据的Servlet地址
+            striped: true,      //是否显示行间隔色
+            dataType: "json",
+            cache: false,       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            sortable: false,    //是否启用排序
+            sortOrder: "asc",   //排序方式
+            pagination: true,   //启动分页
+            pageSize: 50,       //每页显示的记录数
+            pageNumber: 1,      //当前第几页
+            pageList: [20, 50, 100],  //记录数可选列表
+            search: false,      //是否启用查询
+            //showColumns: true,//显示下拉框勾选要显示的列
+            showRefresh: false, //显示刷新按钮
+            sortName: 'Id',     // 设置默认排序为 name
+            uniqueId: "Id",     //每一行的唯一标识，一般为主键列
+            showToggle: false,  //是否显示详细视图和列表视图的切换按钮
+            toolbar: "#toolbar",
+            showRefresh: true,  //是否启用刷新按钮
+            columns: [
+                { field: 'Id', title: '编号', align: 'center' },
+                { field: 'WarehouseName', title: '库房名称', align: 'center' },
+                { field: 'FirstShelf.WarehouseShelfName', title: '货架', align: 'center' },
+                { field: 'ProductId', title: '产品编号', align: 'center' },
+                { field: 'ProductChineseName', title: '产品名称', align: 'center' },
+                { field: 'CurrentQty', title: '库存量', align: 'center' },
+                { field: 'Price', title: '单价', align: 'center' },
+                { field: 'Note', title: '说明', align: 'center' },
+                {
+                    field: 'SignState', title: '操作', align: 'center', formatter: function (value, row, index) {
+                        return '<button class="btn btn-default btn-xs glyphicon glyphicon-pencil" onclick="ShowOut(this)" data-toggle="modal" data-target="#out"  id=' + row.Id + '>盘盈</button>'+
+                               '<button class="btn btn-default btn-xs glyphicon glyphicon-pencil" onclick="ShowOut(this)" data-toggle="modal" data-target="#out"  id=' + row.Id + '>盘亏</button>';
+
+                    }
+                }
+            ]
+        });
+    }
+   
+</script>
+
+<div>
+ 
+    @*列表*@
+    <table id="table"></table>
+
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $.Url.setUrl("GetSpotInventory", "@Url.Action("GetSpotInventory", "InOutbound")");
+
+        $.Url.setUrl("GetWarehouse", "@Url.Action("GetWarehouse", "InOutbound")");
+        $.Url.setUrl("GetWarehouseShelf", "@Url.Action("GetWarehouseShelf", "InOutbound")");
+        $.Url.setUrl("GetProduct", "@Url.Action("GetProduct", "InOutbound")");
+
+        $.Url.setUrl("AddInbound", "@Url.Action("AddInbound", "InOutBound")");
+        $.Url.setUrl("AddOutbound", "@Url.Action("AddOutbound", "InOutbound")");
+
+    </script>
+}

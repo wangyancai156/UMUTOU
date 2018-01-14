@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9CD52FA2-7914-4FED-B15F-F26A0478A34B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WangYc.Services</RootNamespace>
+    <AssemblyName>WangYc.Services</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AutoMapperBootStrapper.cs" />
+    <Compile Include="Implementations\HR\OrganizationService.cs" />
+    <Compile Include="Implementations\HR\RoleService.cs" />
+    <Compile Include="Implementations\HR\UsersService.cs" />
+    <Compile Include="Implementations\BW\InOutBoundService.cs" />
+    <Compile Include="Implementations\BW\WarehouseService.cs" />
+    <Compile Include="Implementations\BW\WarehouseShelfService.cs" />
+    <Compile Include="Implementations\SD\ProductService.cs" />
+    <Compile Include="Interfaces\HR\IOrganizationService.cs" />
+    <Compile Include="Interfaces\HR\IRightsService.cs" />
+    <Compile Include="Interfaces\HR\IRoleService.cs" />
+    <Compile Include="Interfaces\HR\IUsersService.cs" />
+    <Compile Include="Interfaces\BW\IInOutBoundService.cs" />
+    <Compile Include="Interfaces\BW\IWarehouseService.cs" />
+    <Compile Include="Interfaces\BW\IWarehouseShelfService.cs" />
+    <Compile Include="Interfaces\SD\IProductService.cs" />
+    <Compile Include="Mapping\BW\InOutBoundOfShelfMapper.cs" />
+    <Compile Include="Mapping\HR\OrganizationMapper.cs" />
+    <Compile Include="Mapping\HR\RightsMapper.cs" />
+    <Compile Include="Mapping\HR\RoleMapper.cs" />
+    <Compile Include="Mapping\HR\UsersMapper.cs" />
+    <Compile Include="Implementations\HR\RightsService.cs" />
+    <Compile Include="Mapping\BW\InBoundMapper.cs" />
+    <Compile Include="Mapping\BW\InOutBoundMapper.cs" />
+    <Compile Include="Mapping\BW\OutBoundMapper.cs" />
+    <Compile Include="Mapping\BW\WarehouseMapper.cs" />
+    <Compile Include="Mapping\BW\WarehouseShelfMapper.cs" />
+    <Compile Include="Mapping\SD\ProductMapper.cs" />
+    <Compile Include="Messaging\BW\AddWarehouseShelfRequest.cs" />
+    <Compile Include="Messaging\BW\AddWarehouseRequest.cs" />
+    <Compile Include="Messaging\BW\AddInOutBoundOfShelfRequest.cs" />
+    <Compile Include="Messaging\SD\AddProductRequest.cs" />
+    <Compile Include="Messaging\HR\AddRoleRequest.cs" />
+    <Compile Include="Messaging\HR\AddUsersRequest.cs" />
+    <Compile Include="Messaging\BW\AddInBoundRequest.cs" />
+    <Compile Include="Messaging\BW\AddOutBoundRequest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\BW\InOutBoundOfShelfView.cs" />
+    <Compile Include="ViewModels\DataGridView.cs" />
+    <Compile Include="ViewModels\DataTreeView.cs" />
+    <Compile Include="ViewModels\HR\OrganizationView.cs" />
+    <Compile Include="ViewModels\HR\RightsView.cs" />
+    <Compile Include="ViewModels\HR\RoleView.cs" />
+    <Compile Include="ViewModels\HR\UsersView.cs" />
+    <Compile Include="ViewModels\BW\InOutBoundView.cs" />
+    <Compile Include="ViewModels\BW\WarehouseShelfView.cs" />
+    <Compile Include="ViewModels\BW\WarehouseView.cs" />
+    <Compile Include="ViewModels\SD\ProductView.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WangYc.Core.Infrastructure\WangYc.Core.Infrastructure.csproj">
+      <Project>{d30fdc93-07cc-4073-84b2-3f2badeabae2}</Project>
+      <Name>WangYc.Core.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WangYc.Models.Repository\WangYc.Models.Repository.csproj">
+      <Project>{8f650b9c-6389-4904-b5ec-3e0fb17054ee}</Project>
+      <Name>WangYc.Models.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WangYc.Models\WangYc.Models.csproj">
+      <Project>{14e8356f-f104-4661-9ea1-b2c8955daac7}</Project>
+      <Name>WangYc.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WangYc.Repository.NHibernate\WangYc.Repository.NHibernate.csproj">
+      <Project>{d675be4c-605e-4e32-b15a-2afaa06f9401}</Project>
+      <Name>WangYc.Repository.NHibernate</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

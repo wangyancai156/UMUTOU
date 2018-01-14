@@ -1,0 +1,203 @@
+﻿@{
+    ViewBag.Title = "货架";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model  WangYc.Services.ViewModels.BW.WarehouseView
+
+<script type="text/javascript">
+
+    //step.0.初始化
+    $(function () {
+
+        BindList();
+    });
+
+
+    //step.1.绑定列表
+    function BindList() {
+
+        var url = $.Url.Action("GetWarehouseShelf", "WarehouseShelf");
+        var queryParams = { warehouseId: $("#warehouseId").val() };
+        queryParams: queryParams,
+        $('#table').bootstrapTable('destroy');
+        $("#table").bootstrapTable({
+            method: "get",      //使用get请求到服务器获取数据
+            url: url,           //获取数据的Servlet地址
+            striped: true,      //是否显示行间隔色
+            queryParams: queryParams,
+            dataType: "json",
+            cache: false,       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            sortable: false,    //是否启用排序
+            sortOrder: "asc",   //排序方式
+            pagination: true,   //启动分页
+            pageSize: 50,       //每页显示的记录数
+            pageNumber: 1,      //当前第几页
+            pageList: [20, 50, 100],  //记录数可选列表
+            search: false,      //是否启用查询
+            //showColumns: true,//显示下拉框勾选要显示的列
+            showRefresh: false, //显示刷新按钮
+            sortName: 'Id',     // 设置默认排序为 name
+            uniqueId: "Id",     //每一行的唯一标识，一般为主键列
+            showToggle: false,  //是否显示详细视图和列表视图的切换按钮
+            toolbar: "#toolbar",
+            showRefresh: true,  //是否启用刷新按钮
+            columns: [
+                { field: 'Id', title: '货架号', align: 'center' },
+                { field: 'Name', title: '货架名称', align: 'center' },
+                { field: 'Capacity', title: '容量', align: 'center' },
+                { field: 'Note', title: '说明', align: 'center' },
+                {
+                    field: 'SignState', title: '操作', align: 'center', formatter: function (value, row, index) {
+                        return '<button class="btn btn-default btn-xs glyphicon glyphicon-pencil" onclick="ShowUpdate(this)" data-toggle="modal" data-target="#add"  id=' + row.Id + '>编辑</button>' +
+                               '<button class="btn btn-danger btn-xs glyphicon glyphicon-trash" onclick="Remove(this)" id=' + row.Id + ' >删除</button>';
+
+                    }
+                }
+            ]
+        });
+    }
+
+    //step.2.添加
+    function Add() {
+
+        var url = "";
+        var id = $("#hd_id").val();
+        if (id == "") {
+            url = $.Url.Action("AddWarehouseShelf", "WarehouseShelf");
+        } else {
+            url = $.Url.Action("UpdateWarehouseShelf", "WarehouseShelf");
+        }
+
+        var name = $("#name").val();
+        var capacity = $("#capacity").val();
+        var note = $("#note").val();
+        var warehouseId = $("#warehouseId").val();
+
+        var request = { "Id": id, "Name": name, "Capacity": capacity, "Note": note, "WarehouseId": warehouseId };
+        $.post(url, request, function (data) {
+            CloseAdd();
+            BindList();
+        });
+    }
+
+    //step.3.修改
+    function ShowUpdate(sender) {
+       
+        var id = $(sender).attr("id");
+        var $table = $('#table');
+        var row = $table.bootstrapTable('getRowByUniqueId', id);
+
+        $("#hd_id").val(row.Id);
+        $("#name").val(row.Name);
+        $("#capacity").val(row.Capacity);
+        $("#note").val(row.Note);
+
+    }
+
+    //step.4.关闭添加窗体
+    function CloseAdd() {
+        $('#add').modal('hide');
+    }
+    //step.5.删除
+    function Remove(sender) {
+
+        var warehouseId = $("#warehouseId").val();
+        var id = $(sender).attr("id");
+      
+        var url = $.Url.Action("RemoveWarehouseShelf", "WarehouseShelf");
+        var request = { "warehouseId": warehouseId, "id": id };
+        $.post(url, request, function (data) {
+            BindList();
+        });
+    }
+
+    //step.6.返回
+    function Return() {
+        location.href = $.Url.Action("Index", "Warehouse");
+    }
+
+</script>
+
+
+
+
+<div>
+
+    @*工具栏*@
+    <table>
+        <tr>
+            <td>
+                <div id="toolbar">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success" onclick="Return()">
+                            <span class="glyphicon glyphicon-arrow-left"></span> 返回
+                        </button>
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add">
+                            <span class="glyphicon glyphicon-plus"></span> 添加
+                        </button>
+                    </div>
+
+                    <h4 class="glyphicon ">库房：@Model.Name</h4>
+                    <input id="warehouseId" type="hidden" value="@Model.Id" />
+
+                </div>
+            </td>
+
+        </tr>
+    </table>
+
+    @*列表*@
+    <table id="table"></table>
+
+    @*添加编辑*@
+    <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
+        <div class="modal-dialog" role="document" style="max-width:450px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">添加货架</h4>
+                </div>
+                <div class="modal-body">
+                    <input id="hd_id" type="hidden" />
+                    <table class="table" style="margin-bottom:0px;">
+                        <thead>
+                            <tr> </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td width="20%">名称:</td>
+                                <td width="80%"><input type="text" id="name" value="" class="form-control" name="name" maxlength="10" autocomplete="off" /></td>
+                            </tr>
+                            <tr>
+                                <td width="20%">容量:</td>
+                                <td width="80%"><input type="text" id="capacity" value="" class="form-control" name="capacity" maxlength="10" autocomplete="off" /></td>
+                            </tr>
+                            <tr>
+                                <td width="20%">备注:</td>
+                                <td width="80%"><input type="text" id="note" value="" class="form-control" name="note" maxlength="10" autocomplete="off" /></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr></tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="CloseAdd()">取消</button>
+                    <button type="submit" class="btn btn-primary" onclick="Add()">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+
+        $.Url.setUrl("Index", "@Url.Action("Index", "Warehouse")");
+        $.Url.setUrl("GetWarehouseShelf", "@Url.Action("GetWarehouseShelf", "WarehouseShelf")");
+        $.Url.setUrl("AddWarehouseShelf", "@Url.Action("AddWarehouseShelf", "WarehouseShelf")");
+        $.Url.setUrl("UpdateWarehouseShelf", "@Url.Action("UpdateWarehouseShelf", "WarehouseShelf")");
+        $.Url.setUrl("RemoveWarehouseShelf", "@Url.Action("RemoveWarehouseShelf", "WarehouseShelf")");
+ 
+    </script>
+}

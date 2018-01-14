@@ -1,0 +1,17 @@
+D:\wangyancai.work\WangMvc\WangYc.MVC\WangYc.BLL\bin\Debug\WangYc.BLL.dll
+D:\wangyancai.work\WangMvc\WangYc.MVC\WangYc.BLL\bin\Debug\WangYc.BLL.pdb
+D:\wangyancai.work\WangMvc\WangYc.MVC\WangYc.BLL\obj\Debug\WangYc.BLL.dll
+D:\wangyancai.work\WangMvc\WangYc.MVC\WangYc.BLL\obj\Debug\WangYc.BLL.pdb
+E:\wangyancai.work\WangYc.MVC\WangYc.BLL\bin\Debug\WangYc.BLL.dll
+E:\wangyancai.work\WangYc.MVC\WangYc.BLL\bin\Debug\WangYc.BLL.pdb
+E:\wangyancai.work\WangYc.MVC\WangYc.BLL\bin\Debug\WangYc.DAL.dll
+E:\wangyancai.work\WangYc.MVC\WangYc.BLL\bin\Debug\WangYc.Models.dll
+E:\wangyancai.work\WangYc.MVC\WangYc.BLL\bin\Debug\WangYc.DBUtility.dll
+E:\wangyancai.work\WangYc.MVC\WangYc.BLL\bin\Debug\WangYc.DAL.pdb
+E:\wangyancai.work\WangYc.MVC\WangYc.BLL\bin\Debug\WangYc.Models.pdb
+E:\wangyancai.work\WangYc.MVC\WangYc.BLL\bin\Debug\WangYc.DBUtility.pdb
+E:\wangyancai.work\WangYc.MVC\WangYc.BLL\obj\Debug\WangYc.BLL.csprojResolveAssemblyReference.cache
+E:\wangyancai.work\WangYc.MVC\WangYc.BLL\obj\Debug\WangYc.BLL.dll
+E:\wangyancai.work\WangYc.MVC\WangYc.BLL\obj\Debug\WangYc.BLL.pdb
+E:\wangyancai.work\WangYc.MVC\WangYc.BLL\bin\Debug\WangYc.Core.Infrastructure.dll
+E:\wangyancai.work\WangYc.MVC\WangYc.BLL\bin\Debug\WangYc.Core.Infrastructure.pdb

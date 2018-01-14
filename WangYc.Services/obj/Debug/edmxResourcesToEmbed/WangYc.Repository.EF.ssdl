@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WangYcModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Permission">
+    <Key>
+      <PropertyRef Name="PermissionID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PermissionID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="PermissionName" Type="varchar" MaxLength="20" />
+    <Property Name="PermissionNote" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <!--生成过程中发现错误:
+警告 6002: 表/视图“WangYc.dbo.RolePermission”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <EntityType Name="RolePermission">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RolePermissionID" Type="varchar" MaxLength="20" />
+    <Property Name="RoleID" Type="varchar" MaxLength="20" />
+    <Property Name="PermissionID" Type="varchar" MaxLength="20" />
+    <Property Name="RolePermissionNote" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="RoleName" Type="varchar" MaxLength="20" />
+    <Property Name="RoleNote" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <!--生成过程中发现错误:
+警告 6002: 表/视图“WangYc.dbo.UserRole”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="varchar" MaxLength="20" />
+    <Property Name="RoleID" Type="varchar" MaxLength="20" />
+    <Property Name="UserRoleNote" Type="varchar" MaxLength="20" />
+    <Property Name="CreateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="20" />
+    <Property Name="UserPwd" Type="varchar" MaxLength="20" />
+    <Property Name="LastSignTime" Type="datetime" />
+    <Property Name="SignState" Type="int" />
+    <Property Name="TickeID" Type="varchar" MaxLength="128" />
+  </EntityType>
+  <Association Name="FK__RolePermi__Permi__20C1E124">
+    <End Role="Permission" Type="Self.Permission" Multiplicity="0..1" />
+    <End Role="RolePermission" Type="Self.RolePermission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Permission">
+        <PropertyRef Name="PermissionID" />
+      </Principal>
+      <Dependent Role="RolePermission">
+        <PropertyRef Name="PermissionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RolePermi__RoleI__1FCDBCEB">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+    <End Role="RolePermission" Type="Self.RolePermission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="RolePermission">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserRole__RoleID__5CD6CB2B">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserRole__UserID__5DCAEF64">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="WangYcModelStoreContainer">
+    <EntitySet Name="Permission" EntityType="Self.Permission" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RolePermission" EntityType="Self.RolePermission" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[RolePermission].[ID] AS [ID], 
+[RolePermission].[RolePermissionID] AS [RolePermissionID], 
+[RolePermission].[RoleID] AS [RoleID], 
+[RolePermission].[PermissionID] AS [PermissionID], 
+[RolePermission].[RolePermissionNote] AS [RolePermissionNote]
+FROM [dbo].[RolePermission] AS [RolePermission]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="UserRole" EntityType="Self.UserRole" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[UserRole].[ID] AS [ID], 
+[UserRole].[UserID] AS [UserID], 
+[UserRole].[RoleID] AS [RoleID], 
+[UserRole].[UserRoleNote] AS [UserRoleNote], 
+[UserRole].[CreateDate] AS [CreateDate]
+FROM [dbo].[UserRole] AS [UserRole]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__RolePermi__Permi__20C1E124" Association="Self.FK__RolePermi__Permi__20C1E124">
+      <End Role="Permission" EntitySet="Permission" />
+      <End Role="RolePermission" EntitySet="RolePermission" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RolePermi__RoleI__1FCDBCEB" Association="Self.FK__RolePermi__RoleI__1FCDBCEB">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="RolePermission" EntitySet="RolePermission" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserRole__RoleID__5CD6CB2B" Association="Self.FK__UserRole__RoleID__5CD6CB2B">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserRole__UserID__5DCAEF64" Association="Self.FK__UserRole__UserID__5DCAEF64">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WangYcModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Permission">
+    <Key>
+      <PropertyRef Name="PermissionID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PermissionID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PermissionName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="PermissionNote" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="RolePermissions" Relationship="Self.FK__RolePermi__Permi__20C1E124" FromRole="Permission" ToRole="RolePermission" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RoleName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="RoleNote" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="RolePermissions" Relationship="Self.FK__RolePermi__RoleI__1FCDBCEB" FromRole="Roles" ToRole="RolePermission" />
+    <NavigationProperty Name="UserRoles" Relationship="Self.FK__UserRole__RoleID__5CD6CB2B" FromRole="Roles" ToRole="UserRole" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="UserPwd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LastSignTime" Type="DateTime" Precision="3" />
+    <Property Name="SignState" Type="Int32" />
+    <Property Name="TickeID" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UserRoles" Relationship="Self.FK__UserRole__UserID__5DCAEF64" FromRole="Users" ToRole="UserRole" />
+  </EntityType>
+  <EntityType Name="RolePermission">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RolePermissionID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="RoleID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="PermissionID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="RolePermissionNote" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Permission" Relationship="Self.FK__RolePermi__Permi__20C1E124" FromRole="RolePermission" ToRole="Permission" />
+    <NavigationProperty Name="Role" Relationship="Self.FK__RolePermi__RoleI__1FCDBCEB" FromRole="RolePermission" ToRole="Roles" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="RoleID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="UserRoleNote" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Role" Relationship="Self.FK__UserRole__RoleID__5CD6CB2B" FromRole="UserRole" ToRole="Roles" />
+    <NavigationProperty Name="User" Relationship="Self.FK__UserRole__UserID__5DCAEF64" FromRole="UserRole" ToRole="Users" />
+  </EntityType>
+  <Association Name="FK__RolePermi__Permi__20C1E124">
+    <End Role="Permission" Type="Self.Permission" Multiplicity="0..1" />
+    <End Role="RolePermission" Type="Self.RolePermission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Permission">
+        <PropertyRef Name="PermissionID" />
+      </Principal>
+      <Dependent Role="RolePermission">
+        <PropertyRef Name="PermissionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RolePermi__RoleI__1FCDBCEB">
+    <End Role="Roles" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="RolePermission" Type="Self.RolePermission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="RolePermission">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserRole__RoleID__5CD6CB2B">
+    <End Role="Roles" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserRole__UserID__5DCAEF64">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="WangYcEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Permissions" EntityType="Self.Permission" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="RolePermissions" EntityType="Self.RolePermission" />
+    <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+    <AssociationSet Name="FK__RolePermi__Permi__20C1E124" Association="Self.FK__RolePermi__Permi__20C1E124">
+      <End Role="Permission" EntitySet="Permissions" />
+      <End Role="RolePermission" EntitySet="RolePermissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RolePermi__RoleI__1FCDBCEB" Association="Self.FK__RolePermi__RoleI__1FCDBCEB">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="RolePermission" EntitySet="RolePermissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserRole__RoleID__5CD6CB2B" Association="Self.FK__UserRole__RoleID__5CD6CB2B">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="UserRole" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserRole__UserID__5DCAEF64" Association="Self.FK__UserRole__UserID__5DCAEF64">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserRole" EntitySet="UserRoles" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

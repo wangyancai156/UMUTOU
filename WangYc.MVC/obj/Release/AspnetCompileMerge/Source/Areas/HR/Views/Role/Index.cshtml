@@ -1,0 +1,217 @@
+﻿@{
+    ViewBag.Title = "角色管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<script type="text/javascript">
+
+    // step.0.初始化页面
+    $(function () {
+        var url = "@Url.Action("GetOrganizationTree", "Organization")";
+        TreeSelect(url, $("#organization"));
+        BindRoleList();
+
+    });
+
+    //step.1.绑定组织架构下拉框
+    function TreeSelect(url, control) {
+
+        $.get(url, function (data) {
+            //获取选择项目（树形）保存在 select2.min.js中
+            getTreeSelectoption(data, control);
+        });
+        control.select2();
+        control.on('select2:select', function (evt) {
+            //alert(control.select2("data")[0].id);
+        });//选中事件
+    }
+
+    //step.2.绑定用户列表
+    function BindRoleList() {
+
+        var url = "@Url.Action("GetRole", "Role")";
+
+        $('#table').bootstrapTable('destroy');
+        $("#table").bootstrapTable({
+            method: "get",      //使用get请求到服务器获取数据
+            url: url,           //获取数据的Servlet地址
+            striped: true,      //是否显示行间隔色
+            dataType: "json",
+            cache: false,       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            sortable: false,    //是否启用排序
+            sortOrder: "asc",   //排序方式
+            pagination: true,   //启动分页
+            pageSize: 50,       //每页显示的记录数
+            pageNumber: 1,      //当前第几页
+            pageList: [20, 50, 100],  //记录数可选列表
+            search: false,      //是否启用查询
+            //showColumns: true,//显示下拉框勾选要显示的列
+            showRefresh: false, //显示刷新按钮
+            sortName: 'Id',     // 设置默认排序为 name
+            uniqueId: "Id",     //每一行的唯一标识，一般为主键列
+            showToggle: false,  //是否显示详细视图和列表视图的切换按钮
+            toolbar: "#toolbar",
+            showRefresh: true,  //是否启用刷新按钮
+            columns: [
+                 {
+                     field: 'Organization', title: '部门',
+                     align: 'center',
+                     width: '10%',
+                     formatter: function (value, row, index) {
+
+                         return row.Organization.Name;
+                     }
+                 },
+                { field: 'Name', title: '角色', align: 'center' },
+                { field: 'Description', title: '说明', align: 'center' },
+                {
+                    field: 'SignState', title: '操作',
+                    align: 'center',
+                    width: '20%',
+                    formatter: function (value, row, index) {
+
+                        return '<button class="btn btn-default btn-xs glyphicon glyphicon-pencil" onclick="ShowUpdateRoles(this)" data-toggle="modal" data-target="#addRole"  Roleid=' + row.Id + '>编辑</button>' +
+                                '<button class="btn btn-danger btn-xs glyphicon glyphicon-trash" onclick="RemoveRoles(this)" Roleid=' + row.Id + ' >删除</button>';
+                    }
+
+                }
+            ]
+        });
+    };
+
+    //step.3.增删查改
+    function AddRoles() {
+
+        var url = "";
+        var id = $("#rolesid").val()
+        var name = $("#name").val();
+        var description = $("#description").val();
+        var organizationid = $("#organization").val();
+        var request ;
+
+        if (id == "") {
+            url = "@Url.Action("AddRole", "Role")";
+            request =  { "Organizationid": organizationid, "Name": name, "Description": description, "rightsIds": "1" };
+        } else {
+            url = "@Url.Action("UpdateRole", "Role")";
+            request = { "Id": id, "Organizationid": organizationid, "Name": name, "Description": description, "rightsIds": "1" };
+        }
+
+        $.post(url, request, function (data) {
+            CloseAddRoles();
+            BindRoleList();
+            $("#rolesid").val("");
+        });
+
+    }
+
+
+    function ShowUpdateRoles(sender) {
+
+        $('#Rolesid').attr("disabled", true);
+        var RoleId = $(sender).attr("Roleid");
+        var $table = $('#table');
+        var row = $table.bootstrapTable('getRowByUniqueId', RoleId);
+
+        $("#name").val(row.Name);
+        $("#rolesid").val(row.Id);
+        $('#organization').val(row.Organization.Id).select2();
+        $('#description').val(row.Description);
+
+    }
+
+    function CloseAddRoles() {
+
+        $('#addRole').modal('hide');
+        $("#rolesid").val("");
+        $("#name").val("");
+        $("#description").val("");
+    }
+
+    function UpdateRoles() {
+
+        var url = "@Url.Action("UpdateRoles", "Roles")";
+        var rolesid = $("#rolesid").val();
+        var rolesname = $("#name").val();
+        var description = $("#description").val();
+        var organizationid = $("#organization").val();
+        var request = { "organizationid": organizationid, "name": rolesname, "description": description, "rightsIds": "" };
+
+        $.post(url, function (data) {
+            //$.messeger.alert("友情提示",,)
+            CloseAddRoles();
+            alert(data);
+            BindRoleList();
+        });
+    }
+
+    function RemoveRoles(sender) {
+        var url = "@Url.Action("RemoveRoles", "Roles")";
+
+        var RoleId = $(sender).attr("Roleid");
+        $.post(url, { "Roleid": RoleId }, function (data) {
+         
+            alert(data);
+            BindRoleList();
+        });
+    }
+
+
+</script>
+
+@*工具栏*@
+<div id="toolbar">
+    <div class="btn-group">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addRole">
+            <span class="glyphicon glyphicon-plus"></span> 添加
+        </button>
+    </div>
+</div>
+
+@*角色列表*@
+<table id="table" data-toolbar="#toolbar" class="table table-bordered"></table>
+
+@*添加角色*@
+<div class="modal fade" id="addRole" tabindex="-1" role="dialog" aria-labelledby="addRoleModalLabel">
+    <div class="modal-dialog" role="document" style="max-width:450px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">增加角色</h4>
+            </div>
+            <div class="modal-body">
+                <input id="rolesid" type="hidden" />
+                <table class="table" style="margin-bottom:0px;">
+                    <thead>
+                        <tr> </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td width="20%">部门:</td>
+                            <td width="80%"><select id="organization" class="form-control" style=" width:100%; "></select></td>
+                        </tr>
+                        <tr>
+                            <td width="20%">名称:</td>
+                            <td width="80%"><input type="text" id="name" value="" class="form-control" name="Rolename" maxlength="10" autocomplete="off" /></td>
+                        </tr>
+                        <tr>
+                            <td width="20%">描述:</td>
+                            <td width="80%"><input type="text" id="description" value="" class="form-control" name="truename" maxlength="10" autocomplete="off" /></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr></tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="CloseAddRoles()">取消</button>
+                <button type="submit" class="btn btn-primary" onclick="AddRoles()">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

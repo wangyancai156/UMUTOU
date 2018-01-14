@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="WangYc.Models.BW"
+                   assembly="WangYc.Models">
+  <class name="InOutBound" abstract="true" table="InOutBound" >
+    <!--主键ID必须命名为Id-->
+    <id name="Id" column="Id" type="int" unsaved-value="0">
+      <generator class="identity" />
+      <!--generator：主键的生成策略，unsaved-value：主键的默认值， -->
+    </id>
+    <discriminator column="Type" type="string"></discriminator>
+    <property name="Qty" column="Qty"></property>
+    <property name="Price" column="Price" ></property>
+    <property name="Currency" column="Currency" ></property>
+    <property name="Note" column="Note" ></property>
+    <property name="CurrentQty" column="CurrentQty" ></property>
+    <property name="CreateUserId" column="CreateUserId"></property>
+    <property name="CreateDate" column="CreateDate"></property>
+    <!--库房-->
+    <many-to-one name="Warehouse" class="Warehouse" column="WarehouseId"  lazy="false" fetch="select" ></many-to-one>
+    
+    <!--产品-->
+    <many-to-one name="Product" class="WangYc.Models.SD.Product" column="ProductId"  lazy="false" fetch="select" ></many-to-one>
+   
+    <subclass name="InBound" discriminator-value="1" dynamic-insert="true" dynamic-update="true">
+      <bag name="OutBounds" inverse="true"  cascade="all">
+        <key column="ParentId"></key>
+        <one-to-many class="OutBound" />
+      </bag>
+      <bag name="InBoundOfShelf" inverse="true"  cascade="all">
+        <key column="InOutBoundId"></key>
+        <one-to-many class="InBoundOfShelf"/>
+      </bag>
+    </subclass>
+    <subclass name="OutBound" discriminator-value="0" dynamic-insert="true" dynamic-update="true">
+
+      <many-to-one name="InBound" class="InBound" column="ParentId"  lazy="false" fetch="select" ></many-to-one>
+
+      <bag name="OutBoundOfShelf" inverse="true"  cascade="all">
+        <key column="InOutBoundId"></key>
+        <one-to-many class="OutBoundOfShelf"/>
+      </bag>
+    </subclass>
+   
+  </class>
+</hibernate-mapping>

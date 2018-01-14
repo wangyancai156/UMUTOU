@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="WangYc.Models.BW"
+                   assembly="WangYc.Models">
+  <class name="Warehouse" abstract="true" table="Warehouse" >
+    <!--主键ID必须命名为Id-->
+    <id name="Id" column="Id" type="int" unsaved-value="0">
+      <generator class="identity" />
+      <!--generator：主键的生成策略，unsaved-value：主键的默认值， -->
+    </id>
+
+    <property name="Name" column="Name"></property>
+    <property name="Note" column="Note" ></property>
+    <property name="WarehouseTypeId" column="WarehouseTypeId" ></property>
+    <property name="State" column="State" ></property>
+    <property name="CreateDate" column="CreateDate"></property>
+
+    <!--货架-->
+    <bag name="Shelf" cascade="all-delete-orphan" inverse="true">
+      <key column="WarehouseId"></key>
+      <one-to-many class="WarehouseShelf" />
+    </bag>
+  
+  </class>
+</hibernate-mapping>

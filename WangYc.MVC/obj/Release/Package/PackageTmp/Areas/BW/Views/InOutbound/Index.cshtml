@@ -1,0 +1,316 @@
+﻿@{
+    ViewBag.Title = "库房管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+ 
+<script type="text/javascript">
+
+    //step.0.初始化
+    $(function () {
+
+        BindList();
+       
+        GetWarehouse();
+        GetProduct();
+    
+    });
+
+    //step.1.绑定列表
+    function BindList() {
+        var url = $.Url.Action("GetSpotInventory");
+        $('#table').bootstrapTable('destroy');
+        $("#table").bootstrapTable({
+            method: "get",      //使用get请求到服务器获取数据
+            url: url,           //获取数据的Servlet地址
+            striped: true,      //是否显示行间隔色
+            dataType: "json",
+            cache: false,       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            sortable: false,    //是否启用排序
+            sortOrder: "asc",   //排序方式
+            pagination: true,   //启动分页
+            pageSize: 50,       //每页显示的记录数
+            pageNumber: 1,      //当前第几页
+            pageList: [20, 50, 100],  //记录数可选列表
+            search: false,      //是否启用查询
+            //showColumns: true,//显示下拉框勾选要显示的列
+            showRefresh: false, //显示刷新按钮
+            sortName: 'Id',     // 设置默认排序为 name
+            uniqueId: "Id",     //每一行的唯一标识，一般为主键列
+            showToggle: false,  //是否显示详细视图和列表视图的切换按钮
+            toolbar: "#toolbar",
+            showRefresh: true,  //是否启用刷新按钮
+            columns: [
+                { field: 'Id', title: '编号', align: 'center' },
+                { field: 'WarehouseName', title: '库房名称', align: 'center' },
+                { field: 'FirstShelf.WarehouseShelfName', title: '货架', align: 'center' },
+                { field: 'ProductId', title: '产品编号', align: 'center' },
+                { field: 'ProductChineseName', title: '产品名称', align: 'center' },
+                { field: 'CurrentQty', title: '库存量', align: 'center' },
+                { field: 'Price', title: '单价', align: 'center' },
+                { field: 'Note', title: '说明', align: 'center' },
+                {
+                    field: 'SignState', title: '操作', align: 'center', formatter: function (value, row, index) {
+                        return '<button class="btn btn-default btn-xs glyphicon glyphicon-pencil" onclick="ShowOut(this)" data-toggle="modal" data-target="#out"  id=' + row.Id + '>出库</button>';
+
+                    }
+                }
+            ]
+        });
+    }
+
+    //step.2.添加
+    function Add() {
+
+        var url = $.Url.Action("AddInbound");
+        var warehouseid = $('#werahouse').val();
+        var warehouseShelfid = $('#werahouseShelf').val();
+        var productid = $("#product").val();
+        var price = $("#price").val();
+        var qty =  $("#qty").val();
+        var note = $("#note").val();
+        var request = { "Id": "", "WarehouseId": warehouseid, "WarehouseShelfId": warehouseShelfid, "ProductId": productid, "Price": price, "Qty": qty, "Note": note, "CreateUserId": "209" };
+        $.post(url, request, function (data) {
+            CloseAdd();
+            BindList();
+        });
+    }
+    //step.2.1.获取库房
+    function GetWarehouse() {
+        $.ajax({
+            url: $.Url.Action("GetWarehouse"),//写你自己的方法，返回map，我返回的map包含了两个属性：data：集合，total：集合记录数量，所以后边会有data.data的写法。。。
+            // 数据发送方式
+            type: "get",
+            // 接受数据格式
+            dataType: "json",
+            // 要传递的数据
+            data: 'data',
+            // 回调函数，接受服务器端返回给客户端的值，即result值
+            success: function (data) {
+               // $('#werahouse').selectpicker('destroy')
+                $.each(data, function (i) {
+                    // $("<option value='" + data.data[i].schoolno + "'>" + data.data[i].schoolname + "</option>").appendTo("#schoolno.selectpicker");
+                    $('#werahouse.selectpicker').append("<option value=" + data[i].Id + ">" + data[i].Name + "</option>");
+                });
+                $('#werahouse').selectpicker('refresh');
+                GetWarehouseShelf();
+            },
+            error: function (data) {
+                alert("获取库存" + data);
+            }
+        });
+    }
+    //step.2.3.获取货架
+    function GetWarehouseShelf() {
+        $.ajax({
+            url: $.Url.Action("GetWarehouseShelf") + "?warehoseId=" + $("#werahouse").val(),//写你自己的方法，返回map，我返回的map包含了两个属性：data：集合，total：集合记录数量，所以后边会有data.data的写法。。。
+            // 数据发送方式
+            type: "get",
+            // 接受数据格式
+            dataType: "json",
+            // 要传递的数据
+            data: 'data',
+            // 回调函数，接受服务器端返回给客户端的值，即result值
+            success: function (data) {
+                $("#werahouseShelf").empty();
+                $.each(data, function (i) {
+                    $('#werahouseShelf.selectpicker').append("<option value=" + data[i].Id + ">" + data[i].Name + "</option>");
+                });
+                $('#werahouseShelf').selectpicker('refresh');
+            },
+            error: function (data) {
+                alert("获取库存" + data);
+            }
+        });
+    }
+    //step.2.3.获取产品
+    function GetProduct() {
+        $.ajax({
+            url: $.Url.Action("GetProduct"),//写你自己的方法，返回map，我返回的map包含了两个属性：data：集合，total：集合记录数量，所以后边会有data.data的写法。。。
+            // 数据发送方式
+            type: "get",
+            // 接受数据格式
+            dataType: "json",
+            // 要传递的数据
+            data: 'data',
+            // 回调函数，接受服务器端返回给客户端的值，即result值
+            success: function (data) {
+                $.each(data, function (i) {
+                    // $("<option value='" + data.data[i].schoolno + "'>" + data.data[i].schoolname + "</option>").appendTo("#schoolno.selectpicker");
+                    $('#product.selectpicker').append("<option value=" + data[i].Id + ">" + data[i].ChineseName + "</option>");
+                });
+                $('#product').selectpicker('refresh');
+            },
+            error: function (data) {
+                alert("获取产品" + data);
+            }
+        });
+    }
+    //step.2.4.关闭添加窗体
+    function CloseAdd() {
+        $('#add').modal('hide');
+    }
+
+    //step.3.显示出库
+    function ShowOut(sender) {
+
+        var id = $(sender).attr("id");
+        var $table = $('#table');
+        var row = $table.bootstrapTable('getRowByUniqueId', id);
+
+        $("#hd_out_id").val(row.Id);
+        $("#hd_out_shelfid").val(row.FirstShelf.Id);
+    }
+    //step.3.1.关闭出库
+    function CloseOut() {
+        $('#out').modal('hide');
+    }
+    //step.3.2.出库
+    function Out() {
+
+        var url = $.Url.Action("AddOutbound");
+        var inboundId = $('#hd_out_id').val();
+        var inboundShelfid = $('#hd_out_shelfid').val();
+        var qty = $("#out_qty").val();
+        var price = $("#out_price").val();
+        var note = $("#out_note").val();
+        var request = { "InboundId": inboundId, "InboundShelfId": inboundShelfid, "Qty": qty, "Price": price, "Note": note, "CreateUserId": "209" };
+        $.post(url, request, function (data) {
+            CloseOut();
+            BindList();
+        });
+    }
+
+ 
+</script>
+
+<div>
+
+    @*工具栏*@
+    <div id="toolbar">
+        <div class="btn-group">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add">
+                <span class="glyphicon glyphicon-plus"></span> 添加
+            </button>
+        </div>
+    </div>
+    @*列表*@
+    <table id="table"></table>
+
+    @*人库*@
+    <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
+        <div class="modal-dialog" role="document" style="max-width:450px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">产品入库</h4>
+                </div>
+                <div class="modal-body">
+                    <input id="hd_id" type="hidden" />
+                    <table class="table" style="margin-bottom:0px;">
+                        <thead>
+                            <tr> </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td width="20%">库房:</td>
+                                <td width="80%">
+                                    <select id="werahouse" onchange="GetWarehouseShelf()" class="selectpicker form-control" data-live-search="true"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%">货架:</td>
+                                <td width="80%">
+                                    <select id="werahouseShelf" class="selectpicker form-control" data-live-search="true"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%">产品:</td>
+                                <td width="80%">
+                                    <select id="product" class="selectpicker form-control" data-live-search="true"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%">数量:</td>
+                                <td width="80%"><input type="text" id="qty" value="" class="form-control" name="type" maxlength="10" autocomplete="off" /></td>
+                            </tr>
+                            <tr>
+                                <td width="20%">单价:</td>
+                                <td width="80%"><input type="text" id="price" value="" class="form-control" name="type" maxlength="10" autocomplete="off" /></td>
+                            </tr>
+                            <tr>
+                                <td width="20%">备注:</td>
+                                <td width="80%"><input type="text" id="note" value="" class="form-control" name="note" maxlength="10" autocomplete="off" /></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr></tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="CloseAdd()">取消</button>
+                    <button type="submit" class="btn btn-primary" onclick="Add()">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*出库*@
+    <div class="modal fade" id="out" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
+        <div class="modal-dialog" role="document" style="max-width:450px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">产品出库</h4>
+                </div>
+                <div class="modal-body">
+                    <input id="hd_out_id" type="hidden" />
+                    <input id="hd_out_shelfid" type="hidden" />
+                    <table class="table" style="margin-bottom:0px;">
+                        <thead>
+                            <tr> </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td width="20%">数量:</td>
+                                <td width="80%"><input type="text" id="out_qty" value="" class="form-control" name="type" maxlength="10" autocomplete="off" /></td>
+                            </tr>
+                            <tr>
+                                <td width="20%">单价:</td>
+                                <td width="80%"><input type="text" id="out_price" value="" class="form-control" name="type" maxlength="10" autocomplete="off" /></td>
+                            </tr>
+                            <tr>
+                                <td width="20%">备注:</td>
+                                <td width="80%"><input type="text" id="out_note" value="" class="form-control" name="note" maxlength="10" autocomplete="off" /></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr></tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="CloseOut()">取消</button>
+                    <button type="submit" class="btn btn-primary" onclick="Out()">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $.Url.setUrl("GetSpotInventory", "@Url.Action("GetSpotInventory", "InOutbound")");
+
+        $.Url.setUrl("GetWarehouse", "@Url.Action("GetWarehouse", "InOutbound")");
+        $.Url.setUrl("GetWarehouseShelf", "@Url.Action("GetWarehouseShelf", "InOutbound")");
+        $.Url.setUrl("GetProduct", "@Url.Action("GetProduct", "InOutbound")");
+
+        $.Url.setUrl("AddInbound", "@Url.Action("AddInbound", "InOutBound")");
+        $.Url.setUrl("AddOutbound", "@Url.Action("AddOutbound", "InOutbound")");
+
+        @*$.Url.setUrl("UpdateInbound", "@Url.Action("UpdateInbound", "InOutbound")");
+        $.Url.setUrl("AddOutbound", "@Url.Action("AddOutbound", "InOutbound")");
+        $.Url.setUrl("UpdateOutbound", "@Url.Action("UpdateOutbound", "InOutbound")");*@
+    </script>
+}

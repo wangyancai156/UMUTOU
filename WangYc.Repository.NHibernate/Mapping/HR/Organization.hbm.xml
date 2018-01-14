@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="WangYc.Models.HR"
+                   assembly="WangYc.Models">
+  <class name="Organization" table="Organization" dynamic-insert="true" dynamic-update="true" >
+    <!--主键ID必须命名为Id-->
+    <id name="Id" column="Id" type="int" unsaved-value="0">
+      <generator class="identity" />
+      <!--generator：主键的生成策略，unsaved-value：主键的默认值， -->
+    </id>
+ 
+    <property name="Name" column="Name" ></property>
+    <property name="Descriptin" column="Descriptin"></property>
+    <property name="CreateDate" column="CreateDate"></property>
+    <property name="Level" column="Level"></property>
+    
+    <!--多对一，也可用于一对一-->
+    <many-to-one name="Parent" class="Organization" column="ParentId" unique="true" /><!--一对多--> 
+    
+    <bag name="Child"  cascade="all-delete-orphan" inverse="true" lazy="true"  >
+      <key column="ParentId" ></key>
+      <one-to-many class="Organization"/>
+    </bag>
+  
+  </class>
+</hibernate-mapping>

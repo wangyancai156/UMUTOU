@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="WangYc.Models.HR"
+                   assembly="WangYc.Models">
+  <class name="Users" table="Users" >
+    <!--主键ID必须命名为Id-->
+    <id name="Id" column="UserID" type="string" unsaved-value="0">
+      <generator class="assigned" />
+      <!--generator：主键的生成策略，unsaved-value：主键的默认值， -->
+    </id>
+    <!--<many-to-one name="Organization" class="Organization" column="OrganizationId" />-->
+    
+    <many-to-one name="Organization" class="Organization" lazy="false" fetch="select" >
+      <column name="OrganizationId" sql-type="int" ></column>
+    </many-to-one>
+
+    <property name="Telephone" column="Telephone" ></property>
+    <property name="UserName" column="UserName" ></property>
+    <property name="UserPwd" column="UserPwd" ></property>
+    <property name="LastSignTime" column="LastSignTime"></property>
+    <property name="SignState" column="SignState"></property>
+    <property name="TickeID" column="TickeID"></property>
+    <!--一对多关系--><!--
+    <bag name="UserRoles" cascade="all-delete-orphan" inverse="true">
+      <key column="UserID"></key>
+      <one-to-many class="UserRole" />
+    </bag>-->
+
+    <!--<set name="UserRoles" table="WangYc.dbo.UserRole" generic="true" inverse="true">
+      <key column="UserRoleID" />
+      <one-to-many class="UserRole"/>
+    </set>-->
+
+
+  </class>
+</hibernate-mapping>

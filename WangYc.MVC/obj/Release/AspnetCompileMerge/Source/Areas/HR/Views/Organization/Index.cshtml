@@ -1,0 +1,181 @@
+﻿@{
+    ViewBag.Title = "组织机构管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+
+
+    $(function () {
+
+        BindOrganization();
+    });
+
+
+    function BindOrganization() {
+        var url = "@Url.Action("GetOrganization", "Organization")";
+        $('#tb').bootstrapTable({
+            url: url,
+            sidePagination: 'client',
+            treeView: true,
+            treeId: "Id",
+            treeField: "Name",
+            treeRootLevel: 1,
+            striped: true,      //是否显示行间隔色
+            dataType: "json",
+            cache: false,       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            sortable: false,    //是否启用排序
+            sortOrder: "asc",   //排序方式
+            pagination: true,   //启动分页
+            pageSize: 50,       //每页显示的记录数
+            pageNumber: 1,      //当前第几页
+            pageList: [20, 50, 100],  //记录数可选列表
+            search: false,      //是否启用查询
+            //showColumns: true,//显示下拉框勾选要显示的列
+            showRefresh: false, //显示刷新按钮
+            sortName: 'Id',     // 设置默认排序为 name
+            uniqueId: "Id",     //每一行的唯一标识，一般为主键列
+            showToggle: false,  //是否显示详细视图和列表视图的切换按钮
+            //toolbar: "#toolbar",
+            //showRefresh: true,  //是否启用刷新按钮
+            columns: [
+                { title: '机构名称', field: 'Name', width: '20%' },
+                { title: '描述', field: 'Descriptin', width: '20%' },
+                { title: '创建时间', field: 'CreateDate', width: '20%' },
+                { title: '创建人', field: '1', width: '20%' },
+                {
+                    title: '操作', field: '2', width: '15%', formatter: function (value, row, index) {
+                        return '<button class="btn btn-default btn-xs glyphicon glyphicon-plus"  data-toggle="modal" data-target="#addOrganization" onclick="ShowUpdateOrganization(this)" id=' + row.Id + ' updatetype=add>添加组织</button>' +
+                                '<button class="btn btn-default btn-xs glyphicon glyphicon-pencil"   data-toggle="modal" data-target="#addOrganization"  onclick="ShowUpdateOrganization(this)" id=' + row.Id + ' updatetype=update >编辑</button>' +
+                                '<button class="btn btn-danger btn-xs glyphicon glyphicon-trash"  onclick="DeleteOrganization(this)" id=' + row.Id + ' >删除</button>';
+                    }
+                }
+            ]
+        });
+
+    }
+
+
+    function ShowUpdateOrganization(sender) {
+
+        var id = $(sender).attr("id");
+        var updatetype = $(sender).attr("updatetype");
+
+        var $table = $('#tb');
+        var row = $table.bootstrapTable('getRowByUniqueId', id);
+
+        $("#id").val(id);
+        $("#name").val(row.Name);
+        $("#descriptin").val(row.Descriptin);
+        $("#updatetype").val(updatetype);
+
+
+    }
+
+    function CloseAddOrganization() {
+
+        $('#addOrganization').modal('hide');
+        $("#id").val("");
+        $("#name").val("");
+        $("#descriptin").val("");
+        $("#updatetype").val("");
+
+    }
+
+    function UpdateOrganization() {
+
+        var id = $("#id").val();
+        var name = $("#name").val();
+        var description = $("#descriptin").val();
+        var updatetype = $("#updatetype").val();
+
+        var url = "@Url.Action("AddOrganizationChild", "Organization")";
+        if (updatetype == "update") {
+            url = "@Url.Action("UpdateOrganization", "Organization")";
+        }
+
+        var request = { "id": id, "name": name, "description": description };
+        $.post(url, request, function (data) {
+            $('#tb').bootstrapTable("refresh", { silent: true });
+            CloseAddOrganization();
+        });
+    }
+
+    function DeleteOrganization(sender) {
+
+        var url = "@Url.Action("DeleteOrganization", "Organization")";
+        var id = $(sender).attr("id");
+        var request = { "id": id };
+        $.post(url, request, function (data) {
+            $('#tb').bootstrapTable("refresh", { silent: true });
+            // BindOrganization();
+        });
+    }
+
+
+
+    //绑定组织树结构（作废）
+    function BindOrganizationTree() {
+        //个是treeview 的绑定方法
+        var url = "@Url.Action("GetOrganization", "Organization")";
+        $.get(url, function (data) {
+            //绑定组织架构
+            $('#tree').treeview({
+                data: data,
+                levels: 5,
+                multiSelect: $('#chk-select-multi').is(':checked'),
+                onNodeChecked: function (event, data) {
+                },
+                onNodeSelected: function (event, data) {
+                }
+            });
+
+        });
+    }
+
+</script>
+
+
+@*组织列表*@
+<table id="tb"></table>
+
+@*添加组织*@
+<div class="modal fade" id="addOrganization" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel">
+    <div class="modal-dialog" role="document" style="max-width:450px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">增加组织</h4>
+            </div>
+            <div class="modal-body">
+                <input id="id" type="hidden" />
+                <input id="updatetype" type="hidden" />
+                <table class="table" style="margin-bottom:0px;">
+                    <thead>
+                        <tr> </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td width="20%">部门:</td>
+                            <td width="80%"> <input type="text" id="name" value="" class="form-control" /></td>
+                        </tr>
+                        <tr>
+                            <td width="20%">描述:</td>
+                            <td width="80%"><input type="text" id="descriptin" value="" class="form-control" /></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr></tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="CloseAddOrganization()">取消</button>
+                <button type="submit" class="btn btn-primary" onclick="UpdateOrganization()">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

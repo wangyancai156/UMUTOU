@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D675BE4C-605E-4E32-B15A-2AFAA06F9401}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WangYc.Repository.NHibernate</RootNamespace>
+    <AssemblyName>WangYc.Repository.NHibernate</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Caches.SysCache">
+      <HintPath>bin\Release\NHibernate.Caches.SysCache.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Caches.SysCache2">
+      <HintPath>bin\Release\NHibernate.Caches.SysCache2.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="NHUnitOfWork.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\BW\InOutBoundOfShelfRepository.cs" />
+    <Compile Include="Repositories\HR\OrganizationRepository.cs" />
+    <Compile Include="Repositories\HR\RightsRepository.cs" />
+    <Compile Include="Repositories\HR\RoleRepository.cs" />
+    <Compile Include="Repositories\BW\InOutBoundRepository.cs" />
+    <Compile Include="Repositories\BW\WarehouseRepository.cs" />
+    <Compile Include="Repositories\BW\WarehouseShelfRepository.cs" />
+    <Compile Include="Repositories\QueryTranslator.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\HR\UsersRepository.cs" />
+    <Compile Include="Repositories\SD\ProductRepository.cs" />
+    <Compile Include="SessionFactory.cs" />
+    <Compile Include="SessionStorage\HttpSessionStorageContainer.cs" />
+    <Compile Include="SessionStorage\ISessionStorageContainer.cs" />
+    <Compile Include="SessionStorage\SessionStorageFactory.cs" />
+    <Compile Include="SessionStorage\ThreadSessionStorageContainer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mapping\HR\Roles.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WangYc.Core.Infrastructure\WangYc.Core.Infrastructure.csproj">
+      <Project>{d30fdc93-07cc-4073-84b2-3f2badeabae2}</Project>
+      <Name>WangYc.Core.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WangYc.Models.Repository\WangYc.Models.Repository.csproj">
+      <Project>{8f650b9c-6389-4904-b5ec-3e0fb17054ee}</Project>
+      <Name>WangYc.Models.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WangYc.Models\WangYc.Models.csproj">
+      <Project>{14e8356f-f104-4661-9ea1-b2c8955daac7}</Project>
+      <Name>WangYc.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mapping\HR\Users.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mapping\HR\Rights.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mapping\HR\Organization.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mapping\BW\InOutBound.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mapping\SD\Product.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mapping\BW\Warehouse.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mapping\BW\WarehouseShelf.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mapping\BW\InOutBoundOfShelf.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

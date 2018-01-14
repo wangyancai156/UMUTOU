@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="WangYc.Models.BW"
+                   assembly="WangYc.Models">
+  <class name="InOutBoundOfShelf" abstract="true" table="InOutBoundOfShelf" >
+    <!--主键ID必须命名为Id-->
+    <id name="Id" column="Id" type="int" unsaved-value="0">
+      <generator class="identity" />
+      <!--generator：主键的生成策略，unsaved-value：主键的默认值， -->
+    </id>
+    <discriminator column="Type" type="string"></discriminator>
+
+    <many-to-one name="WarehouseShelf" class="WarehouseShelf" column="WarehouseShelfId"></many-to-one>
+    <property name="Qty" column="Qty"></property>
+    <property name="CurrentQty" column="CurrentQty"></property>
+    <property name="Note" column="Note" ></property>
+    <property name="CreateUserId" column="CreateUserId"></property>
+    <property name="CreateDate" column="CreateDate"></property>
+
+    <subclass name="InBoundOfShelf" discriminator-value="1" dynamic-insert="true" dynamic-update="true">
+      
+      <many-to-one name="InBound" class="InBound" column="InOutBoundId"></many-to-one>
+      
+      <bag name="OutBoundOfShelfs" inverse="true"  cascade="all" >
+        <key column="ParentId"></key>
+        <one-to-many class="OutBoundOfShelf" />
+      </bag>
+      
+      
+    </subclass>
+    <subclass name="OutBoundOfShelf" discriminator-value="0" dynamic-insert="true" dynamic-update="true">
+      <many-to-one name="OutBound" class="OutBound" column="InOutBoundId"></many-to-one>
+      <many-to-one name="InBoundOfShelf" class="InBoundOfShelf" column="ParentId"></many-to-one>
+    </subclass>
+  
+  </class>
+</hibernate-mapping>

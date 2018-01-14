@@ -1,0 +1,12 @@
+E:\WangYc.MVC\WangYc.MVC.后台\WangYc.Core.Infrastructure\bin\Release\WangYc.Core.Infrastructure.dll
+E:\WangYc.MVC\WangYc.MVC.后台\WangYc.Core.Infrastructure\bin\Release\WangYc.Core.Infrastructure.pdb
+E:\WangYc.MVC\WangYc.MVC.后台\WangYc.Core.Infrastructure\obj\Release\WangYc.Core.Infrastructure.csprojResolveAssemblyReference.cache
+E:\WangYc.MVC\WangYc.MVC.后台\WangYc.Core.Infrastructure\obj\Release\WangYc.Core.Infrastructure.dll
+E:\WangYc.MVC\WangYc.MVC.后台\WangYc.Core.Infrastructure\obj\Release\WangYc.Core.Infrastructure.pdb
+E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Core.Infrastructure\bin\Release\WangYc.Core.Infrastructure.dll
+E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Core.Infrastructure\bin\Release\WangYc.Core.Infrastructure.pdb
+E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Core.Infrastructure\obj\Release\WangYc.Core.Infrastructure.csprojResolveAssemblyReference.cache
+E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Core.Infrastructure\obj\Release\WangYc.Core.Infrastructure.dll
+E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Core.Infrastructure\obj\Release\WangYc.Core.Infrastructure.pdb
+E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Core.Infrastructure\bin\Release\log4net.dll
+E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Core.Infrastructure\bin\Release\log4net.xml
