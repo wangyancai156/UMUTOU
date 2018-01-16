@@ -28,3 +28,10 @@ E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Core.Infrastructure\bin\Debug
 E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Core.Infrastructure\obj\Debug\WangYc.Core.Infrastructure.dll
 E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Core.Infrastructure\obj\Debug\WangYc.Core.Infrastructure.pdb
 E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Core.Infrastructure\obj\Debug\WangYc.Core.Infrastructure.csprojResolveAssemblyReference.cache
+D:\UMUOTU\WangYc.Core.Infrastructure\bin\Debug\WangYc.Core.Infrastructure.dll
+D:\UMUOTU\WangYc.Core.Infrastructure\bin\Debug\WangYc.Core.Infrastructure.pdb
+D:\UMUOTU\WangYc.Core.Infrastructure\bin\Debug\log4net.dll
+D:\UMUOTU\WangYc.Core.Infrastructure\bin\Debug\log4net.xml
+D:\UMUOTU\WangYc.Core.Infrastructure\obj\Debug\WangYc.Core.Infrastructure.csprojResolveAssemblyReference.cache
+D:\UMUOTU\WangYc.Core.Infrastructure\obj\Debug\WangYc.Core.Infrastructure.dll
+D:\UMUOTU\WangYc.Core.Infrastructure\obj\Debug\WangYc.Core.Infrastructure.pdb

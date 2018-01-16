@@ -53,3 +53,12 @@ E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Models\bin\Debug\log4net.xml
 E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Models\obj\Debug\WangYc.Models.csprojResolveAssemblyReference.cache
 E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Models\obj\Debug\WangYc.Models.dll
 E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Models\obj\Debug\WangYc.Models.pdb
+D:\UMUOTU\WangYc.Models\bin\Debug\WangYc.Models.dll
+D:\UMUOTU\WangYc.Models\bin\Debug\WangYc.Models.pdb
+D:\UMUOTU\WangYc.Models\bin\Debug\WangYc.Core.Infrastructure.dll
+D:\UMUOTU\WangYc.Models\bin\Debug\log4net.dll
+D:\UMUOTU\WangYc.Models\bin\Debug\WangYc.Core.Infrastructure.pdb
+D:\UMUOTU\WangYc.Models\bin\Debug\log4net.xml
+D:\UMUOTU\WangYc.Models\obj\Debug\WangYc.Models.csprojResolveAssemblyReference.cache
+D:\UMUOTU\WangYc.Models\obj\Debug\WangYc.Models.dll
+D:\UMUOTU\WangYc.Models\obj\Debug\WangYc.Models.pdb

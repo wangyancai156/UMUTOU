@@ -96,3 +96,17 @@ E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Models.Repository\obj\Debug\W
 E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Models.Repository\obj\Debug\WangYc.Models.Repository.pdb
 E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Models.Repository\bin\Debug\NHibernate.Caches.SysCache.dll
 E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Models.Repository\bin\Debug\NHibernate.Caches.SysCache2.dll
+D:\UMUOTU\WangYc.Models.Repository\bin\Debug\WangYc.Models.Repository.dll
+D:\UMUOTU\WangYc.Models.Repository\bin\Debug\WangYc.Models.Repository.pdb
+D:\UMUOTU\WangYc.Models.Repository\bin\Debug\Iesi.Collections.dll
+D:\UMUOTU\WangYc.Models.Repository\bin\Debug\log4net.dll
+D:\UMUOTU\WangYc.Models.Repository\bin\Debug\NHibernate.Caches.SysCache.dll
+D:\UMUOTU\WangYc.Models.Repository\bin\Debug\NHibernate.Caches.SysCache2.dll
+D:\UMUOTU\WangYc.Models.Repository\bin\Debug\NHibernate.dll
+D:\UMUOTU\WangYc.Models.Repository\bin\Debug\WangYc.Core.Infrastructure.dll
+D:\UMUOTU\WangYc.Models.Repository\bin\Debug\WangYc.Models.dll
+D:\UMUOTU\WangYc.Models.Repository\bin\Debug\WangYc.Core.Infrastructure.pdb
+D:\UMUOTU\WangYc.Models.Repository\bin\Debug\WangYc.Models.pdb
+D:\UMUOTU\WangYc.Models.Repository\obj\Debug\WangYc.Models.Repository.csprojResolveAssemblyReference.cache
+D:\UMUOTU\WangYc.Models.Repository\obj\Debug\WangYc.Models.Repository.dll
+D:\UMUOTU\WangYc.Models.Repository\obj\Debug\WangYc.Models.Repository.pdb
