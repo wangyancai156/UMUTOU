@@ -1,0 +1,244 @@
+﻿@{
+    ViewBag.Title = "用户管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script type="text/javascript">
+
+    // step.0.初始化页面
+    $(function () {
+        var url = "@Url.Action("GetOrganizationTree", "Organization")";
+        TreeSelect(url, $("#organization"));
+        BindUserList();
+
+        $('#addUser').on('hide.bs.modal', function () {
+            $('#usersid').attr("disabled", false);
+        });
+    });
+
+    //step.1.绑定组织架构下拉框
+    function TreeSelect(url, control) {
+
+        $.get(url, function (data) {
+            //获取选择项目（树形）保存在 select2.min.js中
+            getTreeSelectoption(data, control);
+        });
+        control.select2();
+        control.on('select2:select', function (evt) {
+            //alert(control.select2("data")[0].id);
+        });//选中事件
+    }
+
+    //step.2.绑定用户列表
+    function BindUserList() {
+
+        var url = "@Url.Action("GetUsers", "Users")";
+
+        $('#table').bootstrapTable('destroy');
+        $("#table").bootstrapTable({
+            method: "get",      //使用get请求到服务器获取数据
+            url: url,           //获取数据的Servlet地址
+            striped: true,      //是否显示行间隔色
+            dataType: "json",
+            cache: false,       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            sortable: false,    //是否启用排序
+            sortOrder: "asc",   //排序方式
+            pagination: true,   //启动分页
+            pageSize: 50,       //每页显示的记录数
+            pageNumber: 1,      //当前第几页
+            pageList: [20, 50, 100],  //记录数可选列表
+            search: false,      //是否启用查询
+            //showColumns: true,//显示下拉框勾选要显示的列
+            showRefresh: false, //显示刷新按钮
+            sortName: 'Id',     // 设置默认排序为 name
+            uniqueId: "Id",     //每一行的唯一标识，一般为主键列
+            showToggle: false,  //是否显示详细视图和列表视图的切换按钮
+            toolbar: "#toolbar",
+            showRefresh: true,  //是否启用刷新按钮
+            columns: [
+                 {
+                     field: 'Organization', title: '部门',
+                     align: 'center',
+                     width: '10%',
+                     formatter: function (value, row, index) {
+
+                         return row.Organization.Name;
+                     }
+                 },
+                { field: 'Id', title: '员工编号', align: 'center' },
+                { field: 'UserName', title: '员工名称', align: 'center' },
+                { field: 'UserPwd', title: '登录密码', align: 'center' },
+                { field: 'Telephone', title: '电话', align: 'center' },
+                {
+                    field: 'SignState', title: '状态',
+                    align: 'center',
+                    width: '10%',
+                    formatter: function (value, row, index) {
+                        var result = "";
+                        if (value == "0" || value == null) {
+                            result = '无效';
+                        } else {
+                            result = '有效';
+                        }
+                        return result;
+                    }
+                },
+                {
+                    field: 'SignState', title: '操作',
+                    align: 'center',
+                    width: '20%',
+                    formatter: function (value, row, index) {
+
+                        return '<button class="btn btn-default btn-xs glyphicon glyphicon-pencil" onclick="ShowUpdateUsers(this)" data-toggle="modal" data-target="#addUser"  userid=' + row.Id + '>编辑</button>' +
+                                '<button class="btn btn-danger btn-xs glyphicon glyphicon-trash" onclick="RemoveUsers(this)" userid=' + row.Id + ' >删除</button>';
+                    }
+
+                }
+            ]
+        });
+    };
+
+    //step.3.增删查改
+    function AddUsers() {
+        var url = "";
+        if ($("#usersid").css("display") == "block") {
+            url = "@Url.Action("UpdateUsers", "Users")";
+        } else {
+            url = "@Url.Action("AddUsers", "Users")";
+        }
+
+        var usersname = $("#usersname").val();
+        var usersid = $("#usersid").val();
+        var userspwd = $("#password").val();
+        var organization = $("#organization").select2("data")[0].id
+        var telephone = $("#telephone").val();
+        var request = { "Organizationid": organization, "UserName": usersname, "Id": usersid, "UserPwd": userspwd, "Telephone": telephone };
+        $.post(url, request, function (data) {
+            CloseAddUsers();
+            BindUserList();
+        });
+    }
+
+
+    function ShowUpdateUsers(sender) {
+
+        $('#usersid').attr("disabled", true);
+        var userId = $(sender).attr("userid");
+        var $table = $('#table');
+        var row = $table.bootstrapTable('getRowByUniqueId', userId);
+
+        $("#usersname").val(row.UserName);
+        $("#usersid").val(row.Id);
+        $("#userspwd").val(row.UserPwd);
+        $('#organization').val(row.Organization.Id).select2();
+        $('#telephone').val(row.Telephone);
+
+    }
+
+    function CloseAddUsers() {
+
+        $('#addUser').modal('hide');
+        $("#usersname").val("");
+        $("#usersid").val("");
+        $("#password").val("");
+        $("#telephone").val("");
+    }
+
+    function UpdateUsers() {
+
+        var url = "@Url.Action("UpdateUsers", "Users")";
+        var usersname = $("#usersname").val();
+        var usersid = $("#usersid").val();
+        var userspwd = $("#userspwd").val();
+        var organization = $("#organization").val();
+        var telephone = $("#telephone").val();
+        var request = { "Organizationid": organization, "UserName": usersname, "Id": usersid, "UserPwd": userspwd, "Telephone": telephone };
+
+        $.post(url, function (data) {
+            //$.messeger.alert("友情提示",,)
+            CloseAddUsers();
+            alert(data);
+            BindUserList();
+        });
+    }
+
+    function RemoveUsers(sender) {
+        var url = "@Url.Action("RemoveUsers", "Users")";
+
+        var userId = $(sender).attr("userid");
+        $.post(url, { "userid": userId }, function (data) {
+            //$.messeger.alert("友情提示",,)
+            alert(data);
+            BindUserList();
+        });
+    }
+
+
+</script>
+
+@*工具栏*@
+<div id="toolbar">
+    <div class="btn-group">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addUser">
+            <span class="glyphicon glyphicon-plus"></span> 添加
+        </button>
+    </div>
+</div>
+
+@*用户列表*@
+<table id="table" data-toolbar="#toolbar" class="table table-bordered"></table>
+
+@*添加用户*@
+<div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel">
+    <div class="modal-dialog" role="document" style="max-width:450px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">增加用户</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table" style="margin-bottom:0px;">
+                    <thead>
+                        <tr> </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td width="20%">部门:</td>
+                            <td width="80%"><select id="organization" class="form-control" style=" width:100%; "></select></td>
+                        </tr>
+                        <tr>
+                            <td width="20%">账号:</td>
+                            <td width="80%"><input type="text" id="usersid" value="" class="form-control" name="username" maxlength="10" autocomplete="off" /></td>
+                        </tr>
+                        <tr>
+                            <td width="20%">姓名:</td>
+                            <td width="80%"><input type="text" id="usersname" value="" class="form-control" name="truename" maxlength="10" autocomplete="off" /></td>
+                        </tr>
+                        <tr>
+                            <td width="20%">电话:</td>
+                            <td width="80%"><input type="text" id="telephone" value="" class="form-control" name="usertel" maxlength="13" autocomplete="off" /></td>
+                        </tr>
+                        <tr>
+                            <td width="20%">新密码:</td>
+                            <td width="80%"><input type="password" id="password" class="form-control" name="password" maxlength="18" autocomplete="off" /></td>
+                        </tr>
+                        <tr>
+                            <td width="20%">确认密码:</td>
+                            <td width="80%"><input type="password" class="form-control" name="new_password" maxlength="18" autocomplete="off" /></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr></tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="CloseAddUsers()">取消</button>
+                <button type="submit" class="btn btn-primary" onclick="AddUsers()">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
