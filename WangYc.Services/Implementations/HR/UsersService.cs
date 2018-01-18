@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using WangYc.Models.HR;
 using WangYc.Models.Repository.HR;
-
+using System.Linq;
 using WangYc.Repository.NHibernate;
 using WangYc.Repository.NHibernate.Repositories.HR;
 
@@ -58,6 +59,22 @@ namespace WangYc.Services.Implementations.HR {
             //query.Add(Criterion.Create<Users>(c=>c.UserName,userid,CriteriaOperator.Equal));
             //IEnumerable<Users> user = _usersRepository.FindBy(query);
             return user.ConvertToUsersView();
+        }
+
+        /// <summary>
+        ///  用户登录时查询
+        /// </summary>
+        /// <param name="username">用户名</param>
+        /// <param name="pass">密码</param>
+        /// <returns></returns>
+        public UsersView FindUsersBy(string username, string pass)
+        {
+            Query query = new Query();
+            query.Add(Criterion.Create<Users>(c => c.UserName, username, CriteriaOperator.Equal));
+            query.Add(Criterion.Create<Users>(c => c.UserPwd, pass, CriteriaOperator.Equal));
+            query.QueryOperator = QueryOperator.And;
+            var users = _usersRepository.FindBy(query).ConvertToUsersView();
+            return users.FirstOrDefault();
         }
 
         #endregion
@@ -117,6 +134,23 @@ namespace WangYc.Services.Implementations.HR {
            
             _uow.Commit();
         }
+
+        /// <summary>
+        ///  更新最后登录时间
+        /// </summary>
+        /// <param name="userId">用户编号</param>
+        public void UpdateLastLoginTime(string userId)
+        {
+            Users user = this._usersRepository.FindBy(userId);
+            if (user == null)
+            {
+                throw new EntityIsInvalidException<string>(user.Id.ToString());
+            }
+            user.LastSignTime = DateTime.Now;
+            _usersRepository.Save(user);
+            _uow.Commit();
+        }
+
         #endregion
 
     }

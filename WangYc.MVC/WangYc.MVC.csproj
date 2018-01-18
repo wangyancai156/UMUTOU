@@ -226,6 +226,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Handler\GetVcode.ashx.cs">
+      <DependentUpon>GetVcode.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +238,12 @@
     <Content Include="Content\bootstrap-table.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\css\login\login.css" />
+    <Content Include="Content\css\login\style2.0.css" />
+    <Content Include="Content\Images\login\page1_0.png" />
+    <Content Include="Content\Images\login\page1_1.png" />
+    <Content Include="Content\Images\login\page1_2.png" />
+    <Content Include="Content\Images\login\page1_3.jpg" />
     <Content Include="Scripts\bootstrap-treegrid.js" />
     <Content Include="Content\bootstrap-treeview.css" />
     <Content Include="Content\bootstrap.css" />
@@ -932,6 +941,7 @@
     <Content Include="Areas\SD\Views\Product\Index.cshtml" />
     <Content Include="Areas\BW\Views\InOutbound\Index.cshtml" />
     <Content Include="Areas\BW\Views\InOutbound\Inventory.cshtml" />
+    <Content Include="Handler\GetVcode.ashx" />
     <None Include="Properties\PublishProfiles\website.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
@@ -1064,6 +1074,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1079,6 +1090,10 @@
     <ProjectReference Include="..\WangYc.Controllers\WangYc.Controllers.csproj">
       <Project>{3fec0a0c-9caa-4e1c-80e2-4404c3718a77}</Project>
       <Name>WangYc.Controllers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WangYc.Core.Common\WangYc.Core.Common.csproj">
+      <Project>{e65af6a5-140f-4148-9747-73baa2133d97}</Project>
+      <Name>WangYc.Core.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\WangYc.Core.Infrastructure\WangYc.Core.Infrastructure.csproj">
       <Project>{d30fdc93-07cc-4073-84b2-3f2badeabae2}</Project>
@@ -1115,16 +1130,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>3162</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:3143/</IISUrl>
-          <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>

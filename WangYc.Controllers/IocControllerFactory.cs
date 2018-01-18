@@ -19,6 +19,10 @@ namespace WangYc.Controllers
         }
         protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
         {
+            if (controllerType == null)
+            {
+                throw new HttpException(404, "没有找到相关controller");
+            }
             return ObjectFactory.GetInstance(controllerType) as IController;
         }
     }

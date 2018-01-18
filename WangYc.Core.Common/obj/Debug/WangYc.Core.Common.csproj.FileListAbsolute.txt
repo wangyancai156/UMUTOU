@@ -1,0 +1,5 @@
+E:\umutou\WangYc.Core.Common\bin\Debug\WangYc.Core.Common.dll
+E:\umutou\WangYc.Core.Common\bin\Debug\WangYc.Core.Common.pdb
+E:\umutou\WangYc.Core.Common\obj\Debug\WangYc.Core.Common.csprojResolveAssemblyReference.cache
+E:\umutou\WangYc.Core.Common\obj\Debug\WangYc.Core.Common.dll
+E:\umutou\WangYc.Core.Common\obj\Debug\WangYc.Core.Common.pdb
