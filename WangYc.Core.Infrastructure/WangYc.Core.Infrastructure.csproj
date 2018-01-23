@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\AuthenticationService.cs" />
+    <Compile Include="Account\IAuthenticationService.cs" />
     <Compile Include="Account\UserLoginAuthorizeAttribute.cs" />
     <Compile Include="Configuration\ApplicationSettingFactory.cs" />
     <Compile Include="Configuration\IApplicationSettings.cs" />

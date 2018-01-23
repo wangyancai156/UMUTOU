@@ -1459,7 +1459,6 @@ E:\工作\优木头\UMUOTU\WangYc.MVC\bin\System.Web.WebPages.Deployment.dll
 E:\工作\优木头\UMUOTU\WangYc.MVC\bin\System.Web.WebPages.dll
 E:\工作\优木头\UMUOTU\WangYc.MVC\bin\System.Web.WebPages.Razor.dll
 E:\工作\优木头\UMUOTU\WangYc.MVC\bin\WangYc.Controllers.dll
-E:\工作\优木头\UMUOTU\WangYc.MVC\bin\WangYc.Core.Common.dll
 E:\工作\优木头\UMUOTU\WangYc.MVC\bin\WangYc.Core.Infrastructure.dll
 E:\工作\优木头\UMUOTU\WangYc.MVC\bin\WangYc.Models.dll
 E:\工作\优木头\UMUOTU\WangYc.MVC\bin\WangYc.Models.Repository.dll
@@ -1468,12 +1467,10 @@ E:\工作\优木头\UMUOTU\WangYc.MVC\bin\WangYc.Services.dll
 E:\工作\优木头\UMUOTU\WangYc.MVC\bin\WebGrease.dll
 E:\工作\优木头\UMUOTU\WangYc.MVC\bin\WebMatrix.Data.dll
 E:\工作\优木头\UMUOTU\WangYc.MVC\bin\WebMatrix.WebData.dll
-E:\工作\优木头\UMUOTU\WangYc.MVC\bin\Cmmooc.Information.Component.Tools.dll
 E:\工作\优木头\UMUOTU\WangYc.MVC\bin\log4net.dll
 E:\工作\优木头\UMUOTU\WangYc.MVC\bin\AutoMapper.dll
 E:\工作\优木头\UMUOTU\WangYc.MVC\bin\Iesi.Collections.dll
 E:\工作\优木头\UMUOTU\WangYc.MVC\bin\WangYc.Controllers.pdb
-E:\工作\优木头\UMUOTU\WangYc.MVC\bin\WangYc.Core.Common.pdb
 E:\工作\优木头\UMUOTU\WangYc.MVC\bin\WangYc.Core.Infrastructure.pdb
 E:\工作\优木头\UMUOTU\WangYc.MVC\bin\WangYc.Models.Repository.pdb
 E:\工作\优木头\UMUOTU\WangYc.MVC\bin\WangYc.Models.pdb

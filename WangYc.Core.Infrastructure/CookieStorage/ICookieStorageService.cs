@@ -34,14 +34,6 @@ namespace WangYc.Core.Infrastructure.CookieStorage
         /// </summary>
         /// <param name="cookie"></param>
         void Add(HttpCookie cookie);
-
-
-        /// <summary>
-        /// 添加用户Form验证 Cookie
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="userData"></param>
-        void AddFormAuthenticationCustomeCookie(string name, string userData);
-
+ 
     }
 }

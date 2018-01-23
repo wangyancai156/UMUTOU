@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-
-using StructureMap;
-
 using System.Web;
-using WangYc.Controllers.Controllers.Account;
-using WangYc.Services.Interfaces.HR;
-using WangYc.Services.ViewModels.HR;
- 
+
 
 namespace WangYc.Controllers {
     public class CurrentUserFactory {

@@ -21,11 +21,14 @@ namespace WangYc.Controllers.Controllers.Account {
 
         private readonly IUsersService _usersService;
         private readonly ICookieStorageService _cookieStorageService;
+        private readonly IAuthenticationService _authenticationService;
+        
 
-        public AccountController(IUsersService usersService, ICookieStorageService cookieStorageService) {
+        public AccountController(IUsersService usersService, ICookieStorageService cookieStorageService, IAuthenticationService authenticationService) {
 
             this._usersService = usersService;
             this._cookieStorageService = cookieStorageService;
+            this._authenticationService = authenticationService;
         }
 
         [AllowAnonymous]
@@ -60,9 +63,6 @@ namespace WangYc.Controllers.Controllers.Account {
         [HttpPost]
         [AllowAnonymous]
         public ActionResult Login(string domainName, string loginName, string password, string vcode, string returnUrl) {
-
-         
-        
  
             //Windows身份验证,
             //WindowsIdentity userIdentiy = ActiveDirectoryHelper.GetWindowsIdentity(domainName, userName, password);
@@ -77,14 +77,14 @@ namespace WangYc.Controllers.Controllers.Account {
             if (Session[ApplicationSettingsFactory.GetApplicationSettings().VerificationCode] == null || vcode.Trim() != Session[ApplicationSettingsFactory.GetApplicationSettings().VerificationCode].ToString())
                 return Json(new ResponseResult() { StatusCode = 104, Message = "验证码输入错误" });
 
-            UsersView user = this.FindUsersBy(loginName);
+            UsersView user = this._usersService.FindUsersBy(loginName);
             if (user != null) {
 
                 if (user.UserPwd == password) {
 
                     string userData = domainName + "|" + loginName + "|" + password;
-                    //添加认证
-                    this._cookieStorageService.AddFormAuthenticationCustomeCookie(user.Id, userData);
+                    // 添加认证
+                    this._authenticationService.AddFormAuthenticationCustomeCookie(user.Id, userData);
                     // 更新登录时间
                     this._usersService.UpdateLastLoginTime(user.Id);
                     // 重定向回验证前访问的界面

@@ -942,6 +942,7 @@
     <Content Include="Areas\BW\Views\InOutbound\Index.cshtml" />
     <Content Include="Areas\BW\Views\InOutbound\Inventory.cshtml" />
     <Content Include="Handler\GetVcode.ashx" />
+    <Content Include="nhibernate.config" />
     <None Include="Properties\PublishProfiles\website.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />

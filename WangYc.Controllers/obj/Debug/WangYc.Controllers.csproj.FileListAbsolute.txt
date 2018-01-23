@@ -741,7 +741,6 @@ E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\System.Web.Razor.dll
 E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\System.Web.WebPages.Deployment.dll
 E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\System.Web.WebPages.dll
 E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\System.Web.WebPages.Razor.dll
-E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\WangYc.Core.Common.dll
 E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\WangYc.Core.Infrastructure.dll
 E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\WangYc.Models.dll
 E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\WangYc.Services.dll
@@ -750,7 +749,6 @@ E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\AutoMapper.dll
 E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\WangYc.Models.Repository.dll
 E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\WebMatrix.WebData.dll
 E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\WebMatrix.Data.dll
-E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\WangYc.Core.Common.pdb
 E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\WangYc.Core.Infrastructure.pdb
 E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\WangYc.Models.pdb
 E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\WangYc.Services.pdb
@@ -769,7 +767,6 @@ E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\System.Web.WebPages.Razo
 E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\log4net.xml
 E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\WangYc.Models.Repository.pdb
 E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\WebMatrix.WebData.xml
-E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\WebMatrix.Data.xml
 E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\zh-Hans\Microsoft.Data.Edm.resources.dll
 E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\zh-Hans\Microsoft.Data.OData.resources.dll
 E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\zh-Hans\System.Net.Http.Formatting.resources.dll
@@ -782,7 +779,6 @@ E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\zh-Hans\System.Web.WebPa
 E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\zh-Hans\System.Web.WebPages.Deployment.resources.dll
 E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\zh-Hans\System.Web.WebPages.Razor.resources.dll
 E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\zh-Hans\WebMatrix.WebData.resources.dll
-E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\zh-Hans\WebMatrix.Data.resources.dll
 E:\工作\优木头\UMUOTU\WangYc.Controllers\obj\Debug\WangYc.Controllers.csprojResolveAssemblyReference.cache
 E:\工作\优木头\UMUOTU\WangYc.Controllers\obj\Debug\WangYc.Controllers.dll
 E:\工作\优木头\UMUOTU\WangYc.Controllers\obj\Debug\WangYc.Controllers.pdb
@@ -904,3 +900,5 @@ C:\Users\w209\Desktop\UMUOTU\WangYc.Controllers\obj\Debug\WangYc.Controllers.csp
 C:\Users\w209\Desktop\UMUOTU\WangYc.Controllers\obj\Debug\WangYc.Controllers.dll
 C:\Users\w209\Desktop\UMUOTU\WangYc.Controllers\obj\Debug\WangYc.Controllers.pdb
 D:\UMUOTU\WangYc.Controllers\bin\Debug\Cmmooc.Information.Component.Tools.dll
+E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\WebMatrix.Data.xml
+E:\工作\优木头\UMUOTU\WangYc.Controllers\bin\Debug\zh-Hans\WebMatrix.Data.resources.dll

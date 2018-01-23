@@ -18,6 +18,7 @@ using WangYc.Models.Repository.SD;
 using WangYc.Repository.NHibernate.Repositories.SD;
 using WangYc.Core.Infrastructure.CookieStorage;
 using WangYc.Core.Infrastructure.Logging;
+using WangYc.Core.Infrastructure.Account;
 
 namespace WangYc.MVC
 {
@@ -75,12 +76,15 @@ namespace WangYc.MVC
 
                 // Application Settings
                 For<IApplicationSettings>().Use<WebConfigApplicationSettings>();
+                // NH工作单元
                 For<IUnitOfWork>().Use<WangYc.Repository.NHibernate.NHUnitOfWork>();
-
                 // Logger
                 For<ILogger>().Use<WangYc.Core.Infrastructure.Logging.Log4NetAdapter>();
                 // Cookie
                 For<ICookieStorageService>().Use<CookieStorageService>();
+                // 登录验证
+                For<IAuthenticationService>().Use<AuthenticationService>();
+                
 
             }
         }
