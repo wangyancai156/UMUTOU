@@ -35,14 +35,14 @@ namespace WangYc.Controllers {
 
         public static void SetCurrentUser(string domainName, string userName) {
 
-            AccountController account = new AccountController(ObjectFactory.GetInstance<IUsersService>());
-            UsersView employee = account.GetEmployee(domainName, userName);
+            //AccountController account = new AccountController(ObjectFactory.GetInstance<IUsersService>());
+            //UsersView employee = account.FindUsersBy(userName);
 
-            HttpCookie cookie = new HttpCookie("JKUser");
-            cookie.Values.Add("userId", employee.Id);
-            cookie.Values.Add("userName", userName);
-            cookie.Expires = DateTime.Now.AddDays(7);
-            HttpContext.Current.Response.Cookies.Add(cookie);
+            //HttpCookie cookie = new HttpCookie("JKUser");
+            //cookie.Values.Add("userId", employee.Id);
+            //cookie.Values.Add("userName", userName);
+            //cookie.Expires = DateTime.Now.AddDays(7);
+            //HttpContext.Current.Response.Cookies.Add(cookie);
 
             #region MyRegion
             //cookie.Expires = DateTime.Now.AddDays(7);

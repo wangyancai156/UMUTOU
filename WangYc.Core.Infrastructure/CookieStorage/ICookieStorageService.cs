@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
 
 namespace WangYc.Core.Infrastructure.CookieStorage
 {
@@ -27,5 +28,20 @@ namespace WangYc.Core.Infrastructure.CookieStorage
         /// </summary>
         /// <param name="key"></param>
         void Remove(string key);
+
+        /// <summary>
+        /// 添加Cookie
+        /// </summary>
+        /// <param name="cookie"></param>
+        void Add(HttpCookie cookie);
+
+
+        /// <summary>
+        /// 添加用户Form验证 Cookie
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="userData"></param>
+        void AddFormAuthenticationCustomeCookie(string name, string userData);
+
     }
 }

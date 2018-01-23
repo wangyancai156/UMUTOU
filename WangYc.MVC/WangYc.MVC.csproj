@@ -1058,15 +1058,7 @@
     <Content Include="Content\Images\orderedList8.png" />
     <Content Include="Content\Images\orderedList9.png" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\_RemoveExternalLoginsPartial.cshtml" />
-    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Manage.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -1090,10 +1082,6 @@
     <ProjectReference Include="..\WangYc.Controllers\WangYc.Controllers.csproj">
       <Project>{3fec0a0c-9caa-4e1c-80e2-4404c3718a77}</Project>
       <Name>WangYc.Controllers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WangYc.Core.Common\WangYc.Core.Common.csproj">
-      <Project>{e65af6a5-140f-4148-9747-73baa2133d97}</Project>
-      <Name>WangYc.Core.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\WangYc.Core.Infrastructure\WangYc.Core.Infrastructure.csproj">
       <Project>{d30fdc93-07cc-4073-84b2-3f2badeabae2}</Project>

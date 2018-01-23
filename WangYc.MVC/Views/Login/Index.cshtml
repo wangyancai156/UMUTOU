@@ -22,7 +22,7 @@
             });
             // 切换验证码
             $("#verifyCode").click(function () {
-                var _src = $(this).attr("src") + "?" + Math.random();
+                var _src = $(this).attr("src") + "&dom" + Math.random();
                 $(this).attr("src", _src);
             });
         })

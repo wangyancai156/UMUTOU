@@ -5,7 +5,13 @@ using System.Text;
 
 namespace WangYc.Core.Infrastructure.Configuration {
     public interface IApplicationSettings {
-
+        /// <summary>
+        /// 日志名称
+        /// </summary>
         string LoggerName { get; }
+        /// <summary>
+        /// 验证码名称
+        /// </summary>
+        string VerificationCode { get; }
     }
 }

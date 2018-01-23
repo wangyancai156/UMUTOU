@@ -11,85 +11,110 @@ using WangYc.Core.Infrastructure.Security;
 using System.Web;
 using System.Web.Security;
 using WangYc.Services.ViewModels.HR;
+using WangYc.Models.PModel;
+using WangYc.Core.Infrastructure.Account;
+using WangYc.Core.Infrastructure.CookieStorage;
+using WangYc.Core.Infrastructure.Configuration;
 
 namespace WangYc.Controllers.Controllers.Account {
-    public class AccountController : Controller {
+    public class AccountController:Controller {
 
-        private readonly IUsersService employeeService;
+        private readonly IUsersService _usersService;
+        private readonly ICookieStorageService _cookieStorageService;
 
-        public AccountController(IUsersService employeeService) {
+        public AccountController(IUsersService usersService, ICookieStorageService cookieStorageService) {
 
-            this.employeeService = employeeService;
+            this._usersService = usersService;
+            this._cookieStorageService = cookieStorageService;
         }
 
         [AllowAnonymous]
         public ActionResult Login(string returnUrl) {
 
             ViewBag.ReturnUrl = returnUrl;
+            try {
+
+                string cookieValue = this._cookieStorageService.Retrieve(FormsAuthentication.FormsCookieName);
+                FormsAuthenticationTicket tickets = FormsAuthentication.Decrypt(cookieValue);
+                if (tickets != null && tickets.Name != null || tickets.Expired) {
+                    if (string.IsNullOrEmpty(returnUrl)) {
+                        returnUrl = "/BW/InOutBound/Index";
+                    }
+                    return Redirect(returnUrl);
+                }
+
+            }
+            catch {
+            }
+            return View();
+        }
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="domainName">域名</param>
+        /// <param name="userName">用户名</param>
+        /// <param name="password">密码</param>
+        /// <param name="vcode">验证码</param>
+        /// <param name="returnUrl">请求页面</param>
+        /// <returns></returns>
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult Login(string domainName, string loginName, string password, string vcode, string returnUrl) {
+
+         
+        
+ 
+            //Windows身份验证,
+            //WindowsIdentity userIdentiy = ActiveDirectoryHelper.GetWindowsIdentity(domainName, userName, password);
+            //Form身份验证
+            // 基本信息校验
+            if (string.IsNullOrWhiteSpace(loginName))
+                return Json(new ResponseResult() { StatusCode = 101, Message = "请输入用户名" });
+            if (string.IsNullOrWhiteSpace(password))
+                return Json(new ResponseResult() { StatusCode = 102, Message = "请输入登录密码" });
+            if (string.IsNullOrWhiteSpace(vcode))
+                return Json(new ResponseResult() { StatusCode = 103, Message = "请输入验证码" });
+            if (Session[ApplicationSettingsFactory.GetApplicationSettings().VerificationCode] == null || vcode.Trim() != Session[ApplicationSettingsFactory.GetApplicationSettings().VerificationCode].ToString())
+                return Json(new ResponseResult() { StatusCode = 104, Message = "验证码输入错误" });
+
+            UsersView user = this.FindUsersBy(loginName);
+            if (user != null) {
+
+                if (user.UserPwd == password) {
+
+                    string userData = domainName + "|" + loginName + "|" + password;
+                    //添加认证
+                    this._cookieStorageService.AddFormAuthenticationCustomeCookie(user.Id, userData);
+                    // 更新登录时间
+                    this._usersService.UpdateLastLoginTime(user.Id);
+                    // 重定向回验证前访问的界面
+                    //Response.Redirect(FormsAuthentication.GetRedirectUrl(userIdentiy.Name, true));
+                    if (string.IsNullOrEmpty(returnUrl)) {
+                        returnUrl = "/BW/InOutBound/Index";
+                    }
+                    return Redirect(returnUrl);
+
+                }
+                else {
+                    return View();
+                    //return Json(new ResponseResult() { StatusCode = 102, Message = "密码错误" });
+                }
+
+                // 清空验证码session，避免资源浪费
+                Session.Remove(ApplicationSettingsFactory.GetApplicationSettings().VerificationCode);
+
+
+            }
+            else {
+                //return Json(new ResponseResult() { StatusCode = 102, Message = "用户名错误" });
+            }
+            //return Json(new ResponseResult() { StatusCode = 100, Message = "登录成功" });
             return View();
         }
 
-        [HttpPost]
-        [AllowAnonymous]
-        public ActionResult Login(string domainName, string userName, string password, string returnUrl) {
+        public UsersView FindUsersBy(string userName) {
 
-            WindowsIdentity userIdentiy = ActiveDirectoryHelper.GetWindowsIdentity(domainName, userName, password);
-            if (userIdentiy != null) {
-
-                string userData = domainName + "|" + userName + "|" + password;
-                //BinaryFormatter formatter = new BinaryFormatter();
-                //MemoryStream stream = new MemoryStream();
-                //formatter.Serialize(stream, userIdentiy);
-                //stream.Position = 0;
-                //StreamReader reader = new StreamReader(stream);
-                //userData = reader.ReadToEnd();
-                //stream.Close();
-
-                HttpCookie cookie = CreateFormAuthenticationCustomeCookie(userIdentiy.Name, userData);
-
-                // 写登录Cookie
-                Response.Cookies.Remove(cookie.Name);
-                Response.Cookies.Add(cookie);
-
-                // 重定向回验证前访问的界面
-                //Response.Redirect(FormsAuthentication.GetRedirectUrl(userIdentiy.Name, true));
-                return Redirect(returnUrl);
-            }
-            else {
-                return View();
-            }
-
-        }
-
-        private HttpCookie CreateFormAuthenticationCustomeCookie(string name, string userData) {
-
-            // 1.创建一个FormsAuthenticationTicket，它包含登录名以及额外的用户数据。
-            FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
-                2, name, DateTime.Now, DateTime.Now.AddHours(4), true, userData);
-
-            // 2.加密Ticket，变成一个加密的字符串。
-            string cookieValue = FormsAuthentication.Encrypt(ticket);
-
-            // 3.根据加密结果创建登录Cookie
-            HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, cookieValue);
-            cookie.HttpOnly = true;
-            cookie.Secure = FormsAuthentication.RequireSSL;
-            cookie.Domain = FormsAuthentication.CookieDomain;
-            cookie.Path = FormsAuthentication.FormsCookiePath;
-            cookie.Expires = DateTime.Now.AddHours(4);
-
-            return cookie;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="domainName"></param>
-        /// <param name="userName"></param>
-        /// <returns></returns>
-        public UsersView GetEmployee(string domainName, string userName) {
-
-            return employeeService.FindUsersBy(userName);
+            return this._usersService.FindUsersBy(userName);
         }
     }
 }

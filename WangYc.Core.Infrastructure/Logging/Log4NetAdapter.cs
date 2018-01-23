@@ -7,14 +7,13 @@ using log4net.Config;
 using WangYc.Core.Infrastructure.Configuration;
 namespace WangYc.Core.Infrastructure.Logging {
     public class Log4NetAdapter : ILogger {
-
+        //日志实体类
         private readonly log4net.ILog log;
 
         public Log4NetAdapter() {
             XmlConfigurator.Configure();
-            log = LogManager
-            .GetLogger(ApplicationSettingsFactory.GetApplicationSettings()
-            .LoggerName);
+          
+            log = LogManager.GetLogger(ApplicationSettingsFactory.GetApplicationSettings().LoggerName);
         }
 
 

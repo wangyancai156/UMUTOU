@@ -16,6 +16,8 @@ using WangYc.Services.ViewModels;
 using WangYc.Models.BW;
 using WangYc.Services.Interfaces.SD;
 using WangYc.Services.ViewModels.SD;
+using WangYc.Core.Infrastructure.Account;
+using WangYc.Core.Infrastructure.CookieStorage;
 
 namespace WangYc.Controllers.Controllers.BW {
     public class InOutBoundController : Controller {
@@ -31,10 +33,15 @@ namespace WangYc.Controllers.Controllers.BW {
             this._warehouseService = warehouseService;
             this._warehouseShelfService = warehouseShelfService;
         }
-
-
+        
         public ActionResult Index() {
 
+            //获取 完整url （协议名+域名+虚拟目录名+文件名+参数） 
+            string url = Request.Url.ToString();
+            //获取 虚拟目录名+页面名+参数：
+            string url2 = Request.RawUrl;
+            //获取 虚拟目录名+页面名：
+            string url3 = Request.Url.AbsolutePath;
             return View();
         }
 

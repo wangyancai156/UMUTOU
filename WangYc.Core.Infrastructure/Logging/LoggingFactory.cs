@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WangYc.Core.Infrastructure.Logging {
     public class LoggingFactory {
-
+        //日志工厂
         private static ILogger _logger;
 
         public static void InitializeLogFactory(ILogger logger) {

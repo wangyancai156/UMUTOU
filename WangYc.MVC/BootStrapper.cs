@@ -16,7 +16,8 @@ using WangYc.Services.Implementations.SD;
 using WangYc.Services.Interfaces.SD;
 using WangYc.Models.Repository.SD;
 using WangYc.Repository.NHibernate.Repositories.SD;
- 
+using WangYc.Core.Infrastructure.CookieStorage;
+using WangYc.Core.Infrastructure.Logging;
 
 namespace WangYc.MVC
 {
@@ -31,10 +32,7 @@ namespace WangYc.MVC
         public class ControllerRegistry : Registry {
 
             public ControllerRegistry() {
-
-                For<IApplicationSettings>().Use<WebConfigApplicationSettings>();
-                For<IUnitOfWork>().Use<WangYc.Repository.NHibernate.NHUnitOfWork>();
-
+              
 
                 #region HR
 
@@ -75,7 +73,15 @@ namespace WangYc.MVC
 
                 #endregion
 
-            
+                // Application Settings
+                For<IApplicationSettings>().Use<WebConfigApplicationSettings>();
+                For<IUnitOfWork>().Use<WangYc.Repository.NHibernate.NHUnitOfWork>();
+
+                // Logger
+                For<ILogger>().Use<WangYc.Core.Infrastructure.Logging.Log4NetAdapter>();
+                // Cookie
+                For<ICookieStorageService>().Use<CookieStorageService>();
+
             }
         }
 

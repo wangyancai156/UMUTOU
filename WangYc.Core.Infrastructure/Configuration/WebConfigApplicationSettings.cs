@@ -9,8 +9,16 @@ namespace WangYc.Core.Infrastructure.Configuration {
     public class WebConfigApplicationSettings : IApplicationSettings {
 
         public string LoggerName {
-            get { return ConfigurationManager.AppSettings["JKLoggerName"]; }
+            get {
+                return ConfigurationManager.AppSettings["JKLoggerName"];
+            }
         }
 
+        public string VerificationCode {
+            get {
+                return ConfigurationManager.AppSettings["VerificationCodeName"];
+            }
+        }
+ 
     }
 }

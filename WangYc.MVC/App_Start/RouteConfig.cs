@@ -11,10 +11,9 @@ namespace WangYc.MVC {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "HR", // 路由名称，这个只要保证在路由集合中唯一即可
+                name: "HR123", // 路由名称，这个只要保证在路由集合中唯一即可
                 url: "{controller}/{action}/{id}", //路由规则,匹配以Admin开头的url
-                defaults: new { controller = "Users", action = "Index", id = UrlParameter.Optional },
-                namespaces: new string[] { "WangYc.Controllers" }
+                defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional } 
             );
 
             //routes.MapRoute(

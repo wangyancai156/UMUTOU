@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace WangYc.Core.Infrastructure.Logging {
+    //日志接口
     public interface ILogger {
 
 
