@@ -3,6 +3,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using WangYc.Core.Infrastructure.Account;
 using WangYc.Core.Infrastructure.Configuration;
 using WangYc.Core.Infrastructure.Logging;
 using WangYc.Services;
@@ -29,8 +30,10 @@ namespace WangYc.MVC {
             BootStrapper.ConfigureDependencies();
             //加载Mapper
             AutoMapperBootStrapper.ConfigureAutoMapper();
-            //
+            //配置文件
             ApplicationSettingsFactory.InitializeApplicationSettingsFactory(ObjectFactory.GetInstance<IApplicationSettings>());
+            //验证方法
+            AuthenticationFactory.InitializeAuthenticationFactory(ObjectFactory.GetInstance<IAuthenticationService>());
             //
             ControllerBuilder.Current.SetControllerFactory(new WangYc.Controllers.IocControllerFactory());
 

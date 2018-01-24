@@ -20,7 +20,7 @@ using WangYc.Core.Infrastructure.Account;
 using WangYc.Core.Infrastructure.CookieStorage;
 
 namespace WangYc.Controllers.Controllers.BW {
-    public class InOutBoundController : Controller {
+    public class InOutBoundController : BaseController{
 
         private readonly IInOutBoundService _inOutBoundService;
         private readonly IProductService _productService;
@@ -33,7 +33,7 @@ namespace WangYc.Controllers.Controllers.BW {
             this._warehouseService = warehouseService;
             this._warehouseShelfService = warehouseShelfService;
         }
-        
+
         public ActionResult Index() {
 
             //获取 完整url （协议名+域名+虚拟目录名+文件名+参数） 

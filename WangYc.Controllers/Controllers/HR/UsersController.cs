@@ -15,7 +15,7 @@ using WangYc.Services.Messaging.HR;
 using WangYc.Services.ViewModels;
 
 namespace WangYc.Controllers.Controllers.HR {
-    public class UsersController : Controller {
+    public class UsersController : BaseController {
 
         private readonly IUsersService _usersService;
         public UsersController(IUsersService usersService) {

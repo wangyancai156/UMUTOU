@@ -25,8 +25,28 @@
                 var _src = $(this).attr("src") + "&dom" + Math.random();
                 $(this).attr("src", _src);
             });
+
+            var val = getParam("returnUrl")
+            $("#returnUrl").val(val);
+
         })
-       
+
+        /**
+        * 获取指定的URL参数值
+        * URL:http://www.quwan.com/index?name=tyler
+        * 参数：paramName URL参数
+        * 调用方法:getParam("name")
+        * 返回值:tyler
+        */
+        function getParam(paramName) {
+            paramValue = "", isFound = !1;
+            if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+                arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&"), i = 0;
+                while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++
+            }
+            return paramValue == "" && (paramValue = null), paramValue
+        }
+
     </script>
 </head>
 <body>
@@ -59,6 +79,7 @@
         <div class="tyg-div-form">
 
             <form action="/Account/Login" method="post">
+                <input id="returnUrl" name="returnUrl" type="hidden" />
                 <h2>登录</h2><p class="tyg-p">欢迎进入后台管理</p>
                 <div style="margin:5px 0px;">
                     <input type="text" class="login_username_and_password_input" name="loginName" id="loginName" placeholder="请输入账号..." />
@@ -70,11 +91,11 @@
                     <input type="text" style="width:150px;" class="login_verificationcode_input" name="vcode" id="vcode" placeholder="请输入验证码..." />
                     <img src="~/handler/getvcode.ashx?vname=@(WangYc.Core.Infrastructure.Configuration.ApplicationSettingsFactory.GetApplicationSettings().VerificationCode)" class="getvcode" style="height: 30px; vertical-align: middle;padding-bottom: 4px;"
                          vname="@(WangYc.Core.Infrastructure.Configuration.ApplicationSettingsFactory.GetApplicationSettings().VerificationCode)" title="点击切换" alt="验证码" id="verifyCode" />
-                </div>     
+                </div>
                 <button type="submit" onclick="loginSub()">登<span style="width:20px;"></span>录</button>
             </form>
-       
-            
+
+
         </div>
     </div>
 

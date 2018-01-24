@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using WangYc.Services.Interfaces.SD;
 using WangYc.Services.Messaging;
 using WangYc.Services.ViewModels.SD;
 
 namespace WangYc.Controllers.Controllers.SD {
-    public class ProductController : Controller {
+    public class ProductController : BaseController {
 
         private readonly IProductService _productService;
 

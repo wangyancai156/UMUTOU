@@ -9,7 +9,7 @@ using WangYc.Services.Messaging.BW;
 using WangYc.Services.ViewModels.BW;
 
 namespace WangYc.Controllers.Controllers.BW {
-    public class WarehouseShelfController : Controller {
+    public class WarehouseShelfController : BaseController {
 
         private readonly IWarehouseService _warehouseService;
         private readonly IWarehouseShelfService _warehouseShelfService;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Security;
 
 namespace WangYc.Core.Infrastructure.Account {
     public interface IAuthenticationService {
@@ -12,6 +13,18 @@ namespace WangYc.Core.Infrastructure.Account {
         /// </summary>
         /// <param name="name"></param>
         /// <param name="userData"></param>
-        void AddFormAuthenticationCustomeCookie(string name, string userData);
+        void AddTicket(string name, string userData);
+
+        /// <summary>
+        /// 获取用户Form验证
+        /// </summary>
+        /// <returns></returns>
+        FormsAuthenticationTicket RetrieveTicket();
+
+        /// <summary>
+        /// 验证
+        /// </summary>
+        /// <returns></returns>
+        bool Verification { get; }
     }
 }

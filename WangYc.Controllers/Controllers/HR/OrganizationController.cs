@@ -16,7 +16,7 @@ using WangYc.Services.ViewModels;
 
 namespace WangYc.Controllers.Controllers.HR {
 
-    public class OrganizationController : Controller {
+    public class OrganizationController : BaseController {
 
         private readonly IOrganizationService _organizationService;
         public OrganizationController(IOrganizationService organizationService) {

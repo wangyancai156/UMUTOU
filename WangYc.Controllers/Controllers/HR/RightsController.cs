@@ -9,7 +9,7 @@ using WangYc.Services.ViewModels.HR;
 
 namespace WangYc.Controllers.Controllers.HR {
 
-    public class RightsController : Controller {
+    public class RightsController : BaseController {
 
         private readonly IRightsService _rightsService;
         public RightsController(IRightsService rightsService) {

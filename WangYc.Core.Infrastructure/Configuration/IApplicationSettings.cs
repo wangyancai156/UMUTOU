@@ -13,5 +13,9 @@ namespace WangYc.Core.Infrastructure.Configuration {
         /// 验证码名称
         /// </summary>
         string VerificationCode { get; }
+        /// <summary>
+        /// 登录页面
+        /// </summary>
+        string LoginPage { get; }
     }
 }

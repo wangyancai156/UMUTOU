@@ -19,6 +19,14 @@ namespace WangYc.Core.Infrastructure.Configuration {
                 return ConfigurationManager.AppSettings["VerificationCodeName"];
             }
         }
- 
+
+        public string LoginPage {
+            get {
+                return ConfigurationManager.AppSettings["LoginPage"];
+            }
+        }
+
+        
+
     }
 }

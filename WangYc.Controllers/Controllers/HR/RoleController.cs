@@ -10,7 +10,7 @@ using WangYc.Services.ViewModels;
 using WangYc.Services.ViewModels.HR;
 
 namespace WangYc.Controllers.Controllers.HR {
-    public class RoleController : Controller {
+    public class RoleController : BaseController {
 
         private readonly IRoleService _roleService;
         private readonly IRightsService _rightsService;

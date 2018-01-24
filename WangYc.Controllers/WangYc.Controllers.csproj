@@ -113,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Account\AccountController.cs" />
+    <Compile Include="Controllers\Account\BaseController.cs" />
     <Compile Include="Controllers\BW\InOutBoundController.cs" />
     <Compile Include="Controllers\BW\WarehouseController.cs" />
     <Compile Include="Controllers\BW\WarehouseShelfController.cs" />

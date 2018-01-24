@@ -16,7 +16,7 @@ using WangYc.Services.ViewModels;
 using WangYc.Models.BW;
 
 namespace WangYc.Controllers.Controllers.BW {
-    public class WarehouseController : Controller {
+    public class WarehouseController : BaseController {
 
         private readonly IWarehouseService _warehouseService;
         private readonly IWarehouseShelfService _warehouseShelfService;

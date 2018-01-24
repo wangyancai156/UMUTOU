@@ -17,9 +17,19 @@ namespace WangYc.Core.Infrastructure.Account {
         /// </summary>
         /// <param name="name"></param>
         /// <param name="userData"></param>
-        public void AddFormAuthenticationCustomeCookie(string name, string userData) {
+        public void AddTicket(string name, string userData) {
 
             this._cookieStorageService.Add(CreateFormAuthenticationCustomeCookie(name, userData));
+        }
+
+        /// <summary>
+        /// 获取用户Form验证
+        /// </summary>
+        /// <returns></returns>
+        public FormsAuthenticationTicket RetrieveTicket() {
+
+            string cookieValue = this._cookieStorageService.Retrieve(FormsAuthentication.FormsCookieName);
+            return FormsAuthentication.Decrypt(cookieValue);
         }
 
         /// <summary>
@@ -48,6 +58,20 @@ namespace WangYc.Core.Infrastructure.Account {
             cookie.Expires = DateTime.Now.AddHours(4);
 
             return cookie;
+        }
+
+        /// <summary>
+        /// 验证
+        /// </summary>
+        /// <returns></returns>
+        public bool Verification {
+            get {
+                FormsAuthenticationTicket ticket = this.RetrieveTicket();
+                if (ticket.Name == null || ticket.UserData == null || ticket.Expired) {
+                    return false;
+                }
+                return true;
+            }
         }
     }
 }

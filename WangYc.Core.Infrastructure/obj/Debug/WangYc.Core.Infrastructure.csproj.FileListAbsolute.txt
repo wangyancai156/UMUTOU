@@ -52,7 +52,6 @@ E:\工作\优木头\UMUOTU\WangYc.Core.Infrastructure\bin\Debug\WangYc.Core.Infr
 E:\工作\优木头\UMUOTU\WangYc.Core.Infrastructure\bin\Debug\WangYc.Core.Infrastructure.pdb
 E:\工作\优木头\UMUOTU\WangYc.Core.Infrastructure\bin\Debug\log4net.dll
 E:\工作\优木头\UMUOTU\WangYc.Core.Infrastructure\bin\Debug\log4net.xml
-E:\工作\优木头\UMUOTU\WangYc.Core.Infrastructure\obj\Debug\WangYc.Core.Infrastructure.csprojResolveAssemblyReference.cache
 E:\工作\优木头\UMUOTU\WangYc.Core.Infrastructure\obj\Debug\WangYc.Core.Infrastructure.dll
 E:\工作\优木头\UMUOTU\WangYc.Core.Infrastructure\obj\Debug\WangYc.Core.Infrastructure.pdb
 C:\Users\w209\Desktop\UMUOTU\WangYc.Core.Infrastructure\bin\Debug\WangYc.Core.Infrastructure.dll

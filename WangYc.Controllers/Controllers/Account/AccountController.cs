@@ -84,7 +84,7 @@ namespace WangYc.Controllers.Controllers.Account {
 
                     string userData = domainName + "|" + loginName + "|" + password;
                     // 添加认证
-                    this._authenticationService.AddFormAuthenticationCustomeCookie(user.Id, userData);
+                    this._authenticationService.AddTicket(user.Id, userData);
                     // 更新登录时间
                     this._usersService.UpdateLastLoginTime(user.Id);
                     // 重定向回验证前访问的界面
