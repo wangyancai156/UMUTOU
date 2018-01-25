@@ -4,7 +4,7 @@ using System.Web.Security;
 using WangYc.Core.Infrastructure.CookieStorage;
 
 namespace WangYc.Core.Infrastructure.Account {
-    public class AuthenticationService: IAuthenticationService {
+    public class AuthenticationService:IAuthenticationService {
 
         ICookieStorageService _cookieStorageService;
         public AuthenticationService(ICookieStorageService cookieStorageService) {
@@ -29,7 +29,15 @@ namespace WangYc.Core.Infrastructure.Account {
         public FormsAuthenticationTicket RetrieveTicket() {
 
             string cookieValue = this._cookieStorageService.Retrieve(FormsAuthentication.FormsCookieName);
-            return FormsAuthentication.Decrypt(cookieValue);
+            if (string.IsNullOrEmpty(cookieValue))
+                return null;
+            try {
+                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(cookieValue);
+                return ticket;
+            }
+            catch {
+                return null;
+            }
         }
 
         /// <summary>
@@ -67,7 +75,7 @@ namespace WangYc.Core.Infrastructure.Account {
         public bool Verification {
             get {
                 FormsAuthenticationTicket ticket = this.RetrieveTicket();
-                if (ticket.Name == null || ticket.UserData == null || ticket.Expired) {
+                if (ticket == null || ticket.Name == null || ticket.UserData == null || ticket.Expired) {
                     return false;
                 }
                 return true;

@@ -127,3 +127,12 @@ D:\UMUOTU\WangYc.Models\bin\Debug\zh-Hans\System.Web.Razor.resources.dll
 D:\UMUOTU\WangYc.Models\bin\Debug\zh-Hans\System.Web.WebPages.Razor.resources.dll
 D:\UMUOTU\WangYc.Models\bin\Debug\zh-Hans\System.Web.WebPages.resources.dll
 D:\UMUOTU\WangYc.Models\bin\Debug\zh-Hans\System.Web.WebPages.Deployment.resources.dll
+D:\UMUTOU\WangYc.Models\bin\Debug\WangYc.Models.dll
+D:\UMUTOU\WangYc.Models\bin\Debug\WangYc.Models.pdb
+D:\UMUTOU\WangYc.Models\bin\Debug\WangYc.Core.Infrastructure.dll
+D:\UMUTOU\WangYc.Models\bin\Debug\log4net.dll
+D:\UMUTOU\WangYc.Models\bin\Debug\WangYc.Core.Infrastructure.pdb
+D:\UMUTOU\WangYc.Models\bin\Debug\log4net.xml
+D:\UMUTOU\WangYc.Models\obj\Debug\WangYc.Models.csprojResolveAssemblyReference.cache
+D:\UMUTOU\WangYc.Models\obj\Debug\WangYc.Models.dll
+D:\UMUTOU\WangYc.Models\obj\Debug\WangYc.Models.pdb

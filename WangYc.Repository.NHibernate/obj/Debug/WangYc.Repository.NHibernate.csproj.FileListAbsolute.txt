@@ -183,3 +183,16 @@ D:\UMUOTU\WangYc.Repository.NHibernate\bin\Debug\zh-Hans\System.Web.Razor.resour
 D:\UMUOTU\WangYc.Repository.NHibernate\bin\Debug\zh-Hans\System.Web.WebPages.Razor.resources.dll
 D:\UMUOTU\WangYc.Repository.NHibernate\bin\Debug\zh-Hans\System.Web.WebPages.resources.dll
 D:\UMUOTU\WangYc.Repository.NHibernate\bin\Debug\zh-Hans\System.Web.WebPages.Deployment.resources.dll
+D:\UMUTOU\WangYc.Repository.NHibernate\bin\Debug\WangYc.Repository.NHibernate.dll
+D:\UMUTOU\WangYc.Repository.NHibernate\bin\Debug\WangYc.Repository.NHibernate.pdb
+D:\UMUTOU\WangYc.Repository.NHibernate\bin\Debug\NHibernate.Caches.SysCache.dll
+D:\UMUTOU\WangYc.Repository.NHibernate\bin\Debug\NHibernate.Caches.SysCache2.dll
+D:\UMUTOU\WangYc.Repository.NHibernate\bin\Debug\WangYc.Core.Infrastructure.dll
+D:\UMUTOU\WangYc.Repository.NHibernate\bin\Debug\WangYc.Models.dll
+D:\UMUTOU\WangYc.Repository.NHibernate\bin\Debug\WangYc.Models.Repository.dll
+D:\UMUTOU\WangYc.Repository.NHibernate\bin\Debug\WangYc.Core.Infrastructure.pdb
+D:\UMUTOU\WangYc.Repository.NHibernate\bin\Debug\WangYc.Models.Repository.pdb
+D:\UMUTOU\WangYc.Repository.NHibernate\bin\Debug\WangYc.Models.pdb
+D:\UMUTOU\WangYc.Repository.NHibernate\obj\Debug\WangYc.Repository.NHibernate.csprojResolveAssemblyReference.cache
+D:\UMUTOU\WangYc.Repository.NHibernate\obj\Debug\WangYc.Repository.NHibernate.dll
+D:\UMUTOU\WangYc.Repository.NHibernate\obj\Debug\WangYc.Repository.NHibernate.pdb

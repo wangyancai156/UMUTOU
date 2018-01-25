@@ -14,3 +14,12 @@ E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Models\obj\Release\WangYc.Mod
 E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Models\obj\Release\WangYc.Models.pdb
 E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Models\bin\Release\log4net.dll
 E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Models\bin\Release\log4net.xml
+D:\UMUTOU\WangYc.Models\bin\Release\WangYc.Models.dll
+D:\UMUTOU\WangYc.Models\bin\Release\WangYc.Models.pdb
+D:\UMUTOU\WangYc.Models\bin\Release\WangYc.Core.Infrastructure.dll
+D:\UMUTOU\WangYc.Models\bin\Release\log4net.dll
+D:\UMUTOU\WangYc.Models\bin\Release\WangYc.Core.Infrastructure.pdb
+D:\UMUTOU\WangYc.Models\bin\Release\log4net.xml
+D:\UMUTOU\WangYc.Models\obj\Release\WangYc.Models.csprojResolveAssemblyReference.cache
+D:\UMUTOU\WangYc.Models\obj\Release\WangYc.Models.dll
+D:\UMUTOU\WangYc.Models\obj\Release\WangYc.Models.pdb

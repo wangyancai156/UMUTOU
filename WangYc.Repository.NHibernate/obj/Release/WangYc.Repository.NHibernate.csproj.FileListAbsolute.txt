@@ -28,3 +28,17 @@ E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Repository.NHibernate\bin\Rel
 E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Repository.NHibernate\obj\Release\WangYc.Repository.NHibernate.csprojResolveAssemblyReference.cache
 E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Repository.NHibernate\obj\Release\WangYc.Repository.NHibernate.dll
 E:\wangyancai.work.umutou\WangYc.MVC.后台\WangYc.Repository.NHibernate\obj\Release\WangYc.Repository.NHibernate.pdb
+D:\UMUTOU\WangYc.Repository.NHibernate\bin\Release\WangYc.Repository.NHibernate.dll
+D:\UMUTOU\WangYc.Repository.NHibernate\bin\Release\WangYc.Repository.NHibernate.pdb
+D:\UMUTOU\WangYc.Repository.NHibernate\bin\Release\Iesi.Collections.dll
+D:\UMUTOU\WangYc.Repository.NHibernate\bin\Release\log4net.dll
+D:\UMUTOU\WangYc.Repository.NHibernate\bin\Release\NHibernate.dll
+D:\UMUTOU\WangYc.Repository.NHibernate\bin\Release\WangYc.Core.Infrastructure.dll
+D:\UMUTOU\WangYc.Repository.NHibernate\bin\Release\WangYc.Models.dll
+D:\UMUTOU\WangYc.Repository.NHibernate\bin\Release\WangYc.Models.Repository.dll
+D:\UMUTOU\WangYc.Repository.NHibernate\bin\Release\WangYc.Core.Infrastructure.pdb
+D:\UMUTOU\WangYc.Repository.NHibernate\bin\Release\WangYc.Models.Repository.pdb
+D:\UMUTOU\WangYc.Repository.NHibernate\bin\Release\WangYc.Models.pdb
+D:\UMUTOU\WangYc.Repository.NHibernate\obj\Release\WangYc.Repository.NHibernate.csprojResolveAssemblyReference.cache
+D:\UMUTOU\WangYc.Repository.NHibernate\obj\Release\WangYc.Repository.NHibernate.dll
+D:\UMUTOU\WangYc.Repository.NHibernate\obj\Release\WangYc.Repository.NHibernate.pdb
